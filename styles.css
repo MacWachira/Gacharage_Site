@@ -876,133 +876,108 @@ body.large-text p { font-size: 1.2rem; }
     transform: scale(1.1);
 }
 
-/* Enhanced Ministries Section */
-.ministries-section {
-    padding: 5rem 0;
-    background: var(--light-bg);
-    backdrop-filter: blur(5px);
+/* Enhanced Ministry Details */
+.ministry-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    text-align: left;
 }
 
-.ministries-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.ministry-card {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    cursor: pointer;
-    border-top: 4px solid var(--primary-color);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-}
-
-.ministry-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(30, 58, 95, 0.1), transparent);
-    transition: var(--transition-slow);
-}
-
-.ministry-card:hover::before {
-    left: 100%;
-}
-
-.ministry-card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: var(--shadow-hover);
-}
-
-.ministry-card i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    transition: var(--transition);
-}
-
-.ministry-card:hover i {
-    color: var(--accent-color);
-    transform: scale(1.2) rotate(10deg);
-}
-
-.ministry-card h3 {
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    transition: var(--transition);
-}
-
-.ministry-card:hover h3 {
-    color: var(--primary-color);
-}
-
-.ministry-card p {
+.ministry-details > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
     color: var(--text-light);
-    transition: var(--transition);
 }
 
-.belts-section {
-    margin-top: 4rem;
-}
-
-.belts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.belt-card {
-    background: var(--white);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
+.ministry-details i {
+    color: var(--accent-color);
+    width: 16px;
     text-align: center;
-    border-top: 4px solid var(--primary-color);
-    transition: var(--transition);
-    position: relative;
-    backdrop-filter: blur(5px);
 }
 
-.belt-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-hover);
-}
-
-.belt-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    transition: var(--transition-slow);
-}
-
-.belt-card:hover img {
-    transform: scale(1.1);
-}
-
-.belt-card h4 {
-    padding: 1.5rem 1rem 0.5rem;
+.ministry-details .meeting-info {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-weight: 600;
 }
 
-.belt-card p {
-    padding: 0 1rem 1rem;
-    color: var(--text-dark);
-    line-height: 1.6;
-}
-
-.belt-card strong {
+.ministry-details .leader-info {
     color: var(--secondary-color);
+}
+
+.ministry-details .contact-info {
+    color: var(--success-color);
+}
+
+/* Enhanced Belt Details */
+.belt-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.belt-details > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    line-height: 1.4;
+}
+
+.belt-details i {
+    color: var(--accent-color);
+    margin-top: 0.2rem;
+    min-width: 16px;
+    text-align: center;
+}
+
+.belt-details strong {
+    color: var(--primary-color);
+}
+
+/* Hover effects for ministry details */
+.ministry-card:hover .ministry-details .meeting-info {
+    color: var(--accent-color);
+}
+
+.ministry-card:hover .ministry-details .leader-info {
+    color: var(--primary-color);
+}
+
+.ministry-card:hover .ministry-details .contact-info {
+    color: var(--secondary-color);
+}
+
+/* Responsive adjustments for ministry details */
+@media (max-width: 768px) {
+    .ministry-details > div {
+        font-size: 0.85rem;
+    }
+    
+    .belt-details > div {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ministry-details {
+        text-align: center;
+    }
+    
+    .ministry-details > div {
+        justify-content: center;
+    }
+    
+    .belt-details > div {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.25rem;
+    }
 }
 
 /* Enhanced Events Section */
