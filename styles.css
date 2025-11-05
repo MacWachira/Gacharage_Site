@@ -116,6 +116,19 @@ body.large-text h2 { font-size: 2.4rem; }
 body.large-text h3 { font-size: 2rem; }
 body.large-text p { font-size: 1.2rem; }
 
+/* Remove blueish effect from hero section */
+.hero {
+    background: transparent;
+}
+
+.slide-overlay {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+}
 /* Enhanced Hero Section with Slider */
 .hero {
     height: 80vh;
