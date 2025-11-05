@@ -23,14 +23,16 @@
     --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Main background for the entire site */
+/* Main background for the entire site - REVERT TO ORIGINAL */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background: url('media/church-background.jpg') center/cover fixed;
+    background: 
+        linear-gradient(rgba(30, 58, 95, 0.1), rgba(30, 58, 95, 0.1)),
+        url('media/church-background.jpg') center/cover fixed;
     background-attachment: fixed;
     position: relative;
 }
@@ -45,14 +47,14 @@ body::before {
     background: 
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.1) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(255, 255, 255, 0.1) 100%
+            rgba(30, 58, 95, 0.1) 0%,
+            rgba(30, 58, 95, 0.05) 50%,
+            rgba(30, 58, 95, 0.1) 100%
         );
     z-index: -1;
 }
 
-/* Accessibility Features */
+/* Accessibility Features - REVERT TO ORIGINAL */
 .accessibility-bar {
     background: var(--secondary-color);
     color: var(--white);
@@ -62,15 +64,28 @@ body::before {
     width: 100%;
     z-index: 3000;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 1rem;
     font-size: 0.9rem;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-left: 2rem;
 }
 
-/* Enhanced Hero Section with Slider */
+/* Enhanced Development Section - REVERT TO ORIGINAL */
+.project-card p {
+    padding: 0 1rem;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.progress-text {
+    padding: 0 1rem 1rem;
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+/* Remove blueish effect from hero section only */
 .hero {
     height: 80vh;
     position: relative;
@@ -98,19 +113,6 @@ body::before {
     z-index: 1;
 }
 
-/* Enhanced Development Section - Make text black */
-.project-card p {
-    padding: 0 1rem;
-    color: #000000;
-    line-height: 1.6;
-}
-
-.progress-text {
-    padding: 0 1rem 1rem;
-    display: block;
-    font-weight: 600;
-    color: #000000;
-}
 /* Video Placeholder */
 .video-placeholder {
     position: absolute;
