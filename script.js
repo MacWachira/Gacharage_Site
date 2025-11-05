@@ -15,19 +15,6 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Hero Slider
-const slides = document.querySelectorAll('.slide');
-let currentSlide = 0;
-
-function nextSlide() {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-}
-
-// Change slide every 5 seconds
-setInterval(nextSlide, 5000);
-
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -42,7 +29,106 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Member Registration Form
+// Modal functionality
+const prayerModal = document.getElementById('prayerModal');
+const registerModal = document.getElementById('registerModal');
+const ministryModal = document.getElementById('ministryModal');
+
+const prayerLinks = document.querySelectorAll('#prayerRequestLink, #prayerLink, #quickPrayer, #contactPrayer');
+const registerLinks = document.querySelectorAll('#registerLink, #quickRegister, #contactRegister');
+
+const closeButtons = document.querySelectorAll('.close-modal');
+
+// Open prayer modal
+prayerLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        prayerModal.style.display = 'block';
+    });
+});
+
+// Open registration modal
+registerLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        registerModal.style.display = 'block';
+    });
+});
+
+// Close modals
+closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        prayerModal.style.display = 'none';
+        registerModal.style.display = 'none';
+        ministryModal.style.display = 'none';
+    });
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', (e) => {
+    if (e.target === prayerModal) {
+        prayerModal.style.display = 'none';
+    }
+    if (e.target === registerModal) {
+        registerModal.style.display = 'none';
+    }
+    if (e.target === ministryModal) {
+        ministryModal.style.display = 'none';
+    }
+});
+
+// Quick links navigation
+document.getElementById('quickEvents').addEventListener('click', () => {
+    document.querySelector('#events').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+
+document.getElementById('quickSermons').addEventListener('click', () => {
+    document.querySelector('#sermons').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+
+// Form submissions
+const prayerForm = document.getElementById('prayerForm');
+const prayerSuccess = document.getElementById('prayerSuccess');
+
+prayerForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Show loading state
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    // Formspree submission
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            prayerSuccess.classList.add('show');
+            this.reset();
+            setTimeout(() => {
+                prayerSuccess.classList.remove('show');
+                prayerModal.style.display = 'none';
+            }, 3000);
+        } else {
+            alert('There was a problem submitting your request. Please try again.');
+        }
+    }).catch(error => {
+        alert('There was a problem submitting your request. Please try again.');
+    }).finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+});
+
 const memberForm = document.getElementById('memberForm');
 const memberSuccess = document.getElementById('memberSuccess');
 
@@ -68,7 +154,8 @@ memberForm.addEventListener('submit', function(e) {
             this.reset();
             setTimeout(() => {
                 memberSuccess.classList.remove('show');
-            }, 5000);
+                registerModal.style.display = 'none';
+            }, 3000);
         } else {
             alert('There was a problem submitting your registration. Please try again.');
         }
@@ -80,49 +167,9 @@ memberForm.addEventListener('submit', function(e) {
     });
 });
 
-// Prayer Request Form
-const prayerForm = document.getElementById('prayerForm');
-const prayerSuccess = document.getElementById('prayerSuccess');
-
-prayerForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Show loading state
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Submitting...';
-    submitBtn.disabled = true;
-    
-    // Formspree submission
-    fetch(this.action, {
-        method: 'POST',
-        body: new FormData(this),
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            prayerSuccess.classList.add('show');
-            this.reset();
-            setTimeout(() => {
-                prayerSuccess.classList.remove('show');
-            }, 5000);
-        } else {
-            alert('There was a problem submitting your request. Please try again.');
-        }
-    }).catch(error => {
-        alert('There was a problem submitting your request. Please try again.');
-    }).finally(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    });
-});
-
 // Ministry Modals
 const ministryCards = document.querySelectorAll('.ministry-card');
-const ministryModal = document.getElementById('ministryModal');
 const modalContent = document.getElementById('modalContent');
-const closeModal = document.querySelector('.close-modal');
 
 const ministryData = {
     youth: {
@@ -207,24 +254,14 @@ ministryCards.forEach(card => {
     });
 });
 
-closeModal.addEventListener('click', () => {
-    ministryModal.style.display = 'none';
-});
-
-window.addEventListener('click', (e) => {
-    if (e.target === ministryModal) {
-        ministryModal.style.display = 'none';
-    }
-});
-
 // Navbar background on scroll
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
         navbar.style.backdropFilter = 'blur(10px)';
     } else {
-        navbar.style.background = 'var(--white)';
+        navbar.style.background = 'var(--dark-bg)';
         navbar.style.backdropFilter = 'none';
     }
 });
@@ -244,16 +281,9 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-document.querySelectorAll('.ministry-card, .event-card, .project-card, .sermon-card, .belt-card, .about-content').forEach(el => {
+document.querySelectorAll('.ministry-card, .event-card, .project-card, .sermon-card, .belt-card, .about-content, .link-card').forEach(el => {
     el.classList.add('fade-in');
     observer.observe(el);
-});
-
-// CTA Button functionality
-document.querySelector('.cta-button').addEventListener('click', () => {
-    document.querySelector('#events').scrollIntoView({
-        behavior: 'smooth'
-    });
 });
 
 // Formspree Setup Instructions
@@ -276,27 +306,3 @@ For automatic email notifications:
 1. In Formspree form settings, add email addresses to receive notifications
 2. Customize the email template as needed
 `);
-
-// Add some interactive features
-document.addEventListener('DOMContentLoaded', function() {
-    // Add loading animation to images
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        img.addEventListener('load', function() {
-            this.style.opacity = '1';
-        });
-        img.style.transition = 'opacity 0.3s ease';
-        img.style.opacity = '0';
-    });
-
-    // Add hover effects to cards
-    const cards = document.querySelectorAll('.ministry-card, .belt-card, .project-card, .sermon-card');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-});
