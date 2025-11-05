@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gacharage Anglican Church - Growing in Faith, Serving in Love</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,115 +33,48 @@
         </div>
     </nav>
 
+    <!-- Prayer Request Banner -->
+    <div class="prayer-banner">
+        <p>Need prayer? <a href="#" id="prayerRequestLink">Submit a prayer request</a> and our prayer team will intercede for you.</p>
+    </div>
+
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Welcome to Gacharage Anglican Church</h1>
             <p class="hero-subtitle">Growing in Faith, Serving in Love</p>
-            <button class="cta-button">Join Us This Sunday</button>
-        </div>
-        <div class="media-slider">
-            <div class="slider-track">
-                <div class="slide active">
-                    <img src="images/hero1.jpg" alt="Church Service">
-                </div>
-                <div class="slide">
-                    <video autoplay muted loop>
-                        <source src="videos/worship1.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide">
-                    <img src="images/hero2.jpg" alt="Youth Ministry">
-                </div>
-                <div class="slide">
-                    <video autoplay muted loop>
-                        <source src="videos/event1.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="slide">
-                    <img src="images/hero3.jpg" alt="Community">
-                </div>
-                <div class="slide">
-                    <video autoplay muted loop>
-                        <source src="videos/choir1.mp4" type="video/mp4">
-                    </video>
-                </div>
+            <div>
+                <button class="cta-button" id="registerLink">Become a Member</button>
+                <button class="cta-button" id="prayerLink">Request Prayer</button>
             </div>
         </div>
     </section>
 
-    <!-- Member Registration Form -->
-    <section class="registration-section">
+    <!-- Quick Links Section -->
+    <section class="quick-links">
         <div class="container">
-            <h2 class="section-title">Member Registration</h2>
-            <p class="section-intro">Join our church family and become part of our growing community. Register today to stay connected with all church activities and ministries.</p>
-            <form id="memberForm" class="registration-form" action="https://formspree.io/f/xjkpnbpg" method="POST">
-                <input type="hidden" name="_subject" value="New Member Registration - Gacharage Church">
-                
-                <div class="form-group">
-                    <label for="fullName">Full Name *</label>
-                    <input type="text" id="fullName" name="fullName" required>
+            <div class="links-grid">
+                <div class="link-card" id="quickRegister">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Member Registration</h3>
+                    <p>Join our church family and become part of our growing community</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required>
+                <div class="link-card" id="quickPrayer">
+                    <i class="fas fa-pray"></i>
+                    <h3>Prayer Request</h3>
+                    <p>Submit your prayer requests and our team will pray for you</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" required>
+                <div class="link-card" id="quickEvents">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Upcoming Events</h3>
+                    <p>Check out our calendar of events and activities</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="belt">Select Your Belt *</label>
-                    <select id="belt" name="belt" required>
-                        <option value="">Choose your belt</option>
-                        <option value="ruaka">RUaka Belt</option>
-                        <option value="miberethi">Miberethi Belt</option>
-                        <option value="rumenye">Rumenye Belt</option>
-                    </select>
+                <div class="link-card" id="quickSermons">
+                    <i class="fas fa-video"></i>
+                    <h3>Watch Sermons</h3>
+                    <p>Access our latest sermons and teachings online</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="ministry">Ministry Interest (Optional)</label>
-                    <select id="ministry" name="ministry">
-                        <option value="">Choose ministry</option>
-                        <option value="youth">Youth Ministry</option>
-                        <option value="choir">Choir</option>
-                        <option value="teens">Teens</option>
-                        <option value="sunday-school">Sunday School</option>
-                        <option value="kama">KAMA</option>
-                        <option value="mothers-union">Mothers Union</option>
-                        <option value="ladies-zion">Ladies of Zion</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="address">Residential Address</label>
-                    <input type="text" id="address" name="address" placeholder="Your physical address">
-                </div>
-
-                <div class="form-group">
-                    <label for="ageGroup">Age Group</label>
-                    <select id="ageGroup" name="ageGroup">
-                        <option value="">Select age group</option>
-                        <option value="child">Below 12 years</option>
-                        <option value="teen">13-17 years</option>
-                        <option value="youth">18-35 years</option>
-                        <option value="adult">36-59 years</option>
-                        <option value="senior">60+ years</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="comments">Additional Comments</label>
-                    <textarea id="comments" name="comments" placeholder="Any additional information..." rows="3"></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">Register Now</button>
-                <div class="form-success" id="memberSuccess">Thank you for registering! We will contact you soon.</div>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -149,6 +82,8 @@
     <section id="about" class="about-section">
         <div class="container">
             <h2 class="section-title">About Our Church</h2>
+            <p class="section-intro">Gacharage Anglican Church has been serving the community since 1985, dedicated to spiritual growth, fellowship, and service.</p>
+            
             <div class="about-content">
                 <div class="about-text">
                     <h2>Our History & Mission</h2>
@@ -425,34 +360,12 @@
                     </div>
                 </div>
                 
-                <div class="contact-forms">
-                    <!-- Prayer Request Form -->
-                    <div class="prayer-form">
-                        <h3>Prayer Request</h3>
-                        <form id="prayerForm" action="https://formspree.io/f/xblpnrpj" method="POST">
-                            <input type="hidden" name="_subject" value="Prayer Request - Gacharage Church">
-                            
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <input type="tel" name="phone" placeholder="Your Phone Number (Optional)">
-                            <select name="prayerType">
-                                <option value="">Type of Prayer Request</option>
-                                <option value="healing">Healing</option>
-                                <option value="guidance">Guidance</option>
-                                <option value="family">Family</option>
-                                <option value="financial">Financial</option>
-                                <option value="spiritual">Spiritual Growth</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <textarea name="prayerRequest" placeholder="Your Prayer Request" rows="5" required></textarea>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="urgent" value="yes">
-                                Mark as urgent prayer request
-                            </label>
-                            <button type="submit">Submit Prayer Request</button>
-                            <div class="form-success" id="prayerSuccess">Thank you for your prayer request. We will pray for you!</div>
-                        </form>
-                    </div>
+                <div class="contact-links">
+                    <h3>Quick Actions</h3>
+                    <a href="#" class="link-button" id="contactRegister">Member Registration</a>
+                    <a href="#" class="link-button" id="contactPrayer">Prayer Request</a>
+                    <a href="https://www.dimkessacco.com" target="_blank" class="link-button">Dimkess Sacco</a>
+                    <a href="https://www.ackmtkenyasouth.org" target="_blank" class="link-button">ACK Mt Kenya South Diocese</a>
                 </div>
             </div>
             
@@ -497,12 +410,9 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Newsletter</h4>
-                    <p>Subscribe to our newsletter for updates and announcements</p>
-                    <form style="margin-top: 1rem;">
-                        <input type="email" placeholder="Your email" style="padding: 0.5rem; width: 100%; margin-bottom: 0.5rem; border-radius: 5px; border: none;">
-                        <button type="submit" style="background: var(--accent-color); color: var(--text-dark); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; width: 100%;">Subscribe</button>
-                    </form>
+                    <h4>Get In Touch</h4>
+                    <p>Have questions or need prayer? Reach out to us today.</p>
+                    <a href="#" class="link-button" style="display: inline-block; margin-top: 1rem; text-align: center; padding: 0.5rem 1rem;">Contact Us</a>
                 </div>
             </div>
             
@@ -512,7 +422,137 @@
         </div>
     </footer>
 
-    <!-- Ministry Modals -->
+    <!-- Modals -->
+    <!-- Prayer Request Modal -->
+    <div id="prayerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Prayer Request</h2>
+            <p>Submit your prayer request and our prayer team will intercede for you.</p>
+            <form id="prayerForm" action="https://formspree.io/f/your-prayer-form-id" method="POST">
+                <input type="hidden" name="_subject" value="Prayer Request - Gacharage Church">
+                
+                <div class="form-group">
+                    <label for="prayerName">Your Name *</label>
+                    <input type="text" id="prayerName" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prayerEmail">Email Address *</label>
+                    <input type="email" id="prayerEmail" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="prayerPhone">Phone Number</label>
+                    <input type="tel" id="prayerPhone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="prayerType">Type of Prayer Request</label>
+                    <select id="prayerType" name="prayerType">
+                        <option value="">Select prayer type</option>
+                        <option value="healing">Healing</option>
+                        <option value="guidance">Guidance</option>
+                        <option value="family">Family</option>
+                        <option value="financial">Financial</option>
+                        <option value="spiritual">Spiritual Growth</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="prayerRequest">Your Prayer Request *</label>
+                    <textarea id="prayerRequest" name="prayerRequest" rows="5" required></textarea>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" name="urgent" value="yes">
+                    Mark as urgent prayer request
+                </label>
+                
+                <button type="submit" class="submit-btn">Submit Prayer Request</button>
+                <div class="form-success" id="prayerSuccess">Thank you for your prayer request. We will pray for you!</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Member Registration</h2>
+            <p>Join our church family and become part of our growing community.</p>
+            <form id="memberForm" action="https://formspree.io/f/your-member-form-id" method="POST">
+                <input type="hidden" name="_subject" value="New Member Registration - Gacharage Church">
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="belt">Select Your Belt *</label>
+                    <select id="belt" name="belt" required>
+                        <option value="">Choose your belt</option>
+                        <option value="ruaka">RUaka Belt</option>
+                        <option value="miberethi">Miberethi Belt</option>
+                        <option value="rumenye">Rumenye Belt</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ministry">Ministry Interest (Optional)</label>
+                    <select id="ministry" name="ministry">
+                        <option value="">Choose ministry</option>
+                        <option value="youth">Youth Ministry</option>
+                        <option value="choir">Choir</option>
+                        <option value="teens">Teens</option>
+                        <option value="sunday-school">Sunday School</option>
+                        <option value="kama">KAMA</option>
+                        <option value="mothers-union">Mothers Union</option>
+                        <option value="ladies-zion">Ladies of Zion</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Residential Address</label>
+                    <input type="text" id="address" name="address" placeholder="Your physical address">
+                </div>
+
+                <div class="form-group">
+                    <label for="ageGroup">Age Group</label>
+                    <select id="ageGroup" name="ageGroup">
+                        <option value="">Select age group</option>
+                        <option value="child">Below 12 years</option>
+                        <option value="teen">13-17 years</option>
+                        <option value="youth">18-35 years</option>
+                        <option value="adult">36-59 years</option>
+                        <option value="senior">60+ years</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Additional Comments</label>
+                    <textarea id="comments" name="comments" placeholder="Any additional information..." rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Register Now</button>
+                <div class="form-success" id="memberSuccess">Thank you for registering! We will contact you soon.</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ministry Modal -->
     <div id="ministryModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
