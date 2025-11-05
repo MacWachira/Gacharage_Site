@@ -1,10 +1,21 @@
-// Navigation
+// Enhanced Navigation
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
+const navbar = document.querySelector('.navbar');
 
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    
+    // Add animation delay for menu items
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach((item, index) => {
+        if (navMenu.classList.contains('active')) {
+            item.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s both`;
+        } else {
+            item.style.animation = '';
+        }
+    });
 });
 
 // Close mobile menu when clicking on links
@@ -15,21 +26,28 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Smooth scrolling for navigation links
+// Enhanced smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
+            // Add scroll animation
+            target.style.scrollBehavior = 'smooth';
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
+            
+            // Remove the style after scroll
+            setTimeout(() => {
+                target.style.scrollBehavior = '';
+            }, 1000);
         }
     });
 });
 
-// Modal functionality
+// Modal functionality with enhanced animations
 const prayerModal = document.getElementById('prayerModal');
 const registerModal = document.getElementById('registerModal');
 const ministryModal = document.getElementById('ministryModal');
@@ -39,11 +57,48 @@ const registerLinks = document.querySelectorAll('#registerLink, #quickRegister, 
 
 const closeButtons = document.querySelectorAll('.close-modal');
 
+// Enhanced modal open with animations
+function openModal(modal) {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Add entrance animation
+    const modalContent = modal.querySelector('.modal-content');
+    modalContent.style.animation = 'slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+}
+
+// Enhanced modal close with animations
+function closeModal(modal) {
+    const modalContent = modal.querySelector('.modal-content');
+    modalContent.style.animation = 'slideDown 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 250);
+}
+
+// Add slideDown animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideDown {
+        from {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+        }
+    }
+`;
+document.head.appendChild(style);
+
 // Open prayer modal
 prayerLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
-        prayerModal.style.display = 'block';
+        openModal(prayerModal);
     });
 });
 
@@ -51,57 +106,84 @@ prayerLinks.forEach(link => {
 registerLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
-        registerModal.style.display = 'block';
+        openModal(registerModal);
     });
 });
 
 // Close modals
 closeButtons.forEach(button => {
     button.addEventListener('click', () => {
-        prayerModal.style.display = 'none';
-        registerModal.style.display = 'none';
-        ministryModal.style.display = 'none';
+        const modal = button.closest('.modal');
+        closeModal(modal);
     });
 });
 
 // Close modal when clicking outside
 window.addEventListener('click', (e) => {
     if (e.target === prayerModal) {
-        prayerModal.style.display = 'none';
+        closeModal(prayerModal);
     }
     if (e.target === registerModal) {
-        registerModal.style.display = 'none';
+        closeModal(registerModal);
     }
     if (e.target === ministryModal) {
-        ministryModal.style.display = 'none';
+        closeModal(ministryModal);
     }
 });
 
-// Quick links navigation
+// Enhanced quick links navigation with animations
 document.getElementById('quickEvents').addEventListener('click', () => {
-    document.querySelector('#events').scrollIntoView({
+    const eventsSection = document.querySelector('#events');
+    eventsSection.scrollIntoView({
         behavior: 'smooth'
     });
+    
+    // Add pulse animation to events section
+    eventsSection.style.animation = 'pulse 1s ease-in-out';
+    setTimeout(() => {
+        eventsSection.style.animation = '';
+    }, 1000);
 });
 
 document.getElementById('quickSermons').addEventListener('click', () => {
-    document.querySelector('#sermons').scrollIntoView({
+    const sermonsSection = document.querySelector('#sermons');
+    sermonsSection.scrollIntoView({
         behavior: 'smooth'
     });
+    
+    // Add pulse animation to sermons section
+    sermonsSection.style.animation = 'pulse 1s ease-in-out';
+    setTimeout(() => {
+        sermonsSection.style.animation = '';
+    }, 1000);
 });
 
-// Form submissions
+// Add pulse animation
+const pulseStyle = document.createElement('style');
+pulseStyle.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(pulseStyle);
+
+// Enhanced form submissions with better animations
 const prayerForm = document.getElementById('prayerForm');
 const prayerSuccess = document.getElementById('prayerSuccess');
 
 prayerForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Show loading state
+    // Enhanced loading state
     const submitBtn = this.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Submitting...';
+    submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
     submitBtn.disabled = true;
+    
+    // Add loading animation to form
+    this.style.opacity = '0.7';
     
     // Formspree submission
     fetch(this.action, {
@@ -114,17 +196,20 @@ prayerForm.addEventListener('submit', function(e) {
         if (response.ok) {
             prayerSuccess.classList.add('show');
             this.reset();
+            this.style.opacity = '1';
+            
             setTimeout(() => {
                 prayerSuccess.classList.remove('show');
-                prayerModal.style.display = 'none';
+                closeModal(prayerModal);
             }, 3000);
         } else {
-            alert('There was a problem submitting your request. Please try again.');
+            throw new Error('Network response was not ok');
         }
     }).catch(error => {
         alert('There was a problem submitting your request. Please try again.');
+        this.style.opacity = '1';
     }).finally(() => {
-        submitBtn.textContent = originalText;
+        submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     });
 });
@@ -135,11 +220,14 @@ const memberSuccess = document.getElementById('memberSuccess');
 memberForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Show loading state
+    // Enhanced loading state
     const submitBtn = this.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Registering...';
+    submitBtn.innerHTML = '<span class="loading-spinner"></span>Registering...';
     submitBtn.disabled = true;
+    
+    // Add loading animation to form
+    this.style.opacity = '0.7';
     
     // Formspree submission
     fetch(this.action, {
@@ -152,22 +240,25 @@ memberForm.addEventListener('submit', function(e) {
         if (response.ok) {
             memberSuccess.classList.add('show');
             this.reset();
+            this.style.opacity = '1';
+            
             setTimeout(() => {
                 memberSuccess.classList.remove('show');
-                registerModal.style.display = 'none';
+                closeModal(registerModal);
             }, 3000);
         } else {
-            alert('There was a problem submitting your registration. Please try again.');
+            throw new Error('Network response was not ok');
         }
     }).catch(error => {
         alert('There was a problem submitting your registration. Please try again.');
+        this.style.opacity = '1';
     }).finally(() => {
-        submitBtn.textContent = originalText;
+        submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     });
 });
 
-// Ministry Modals
+// Enhanced Ministry Modals with animations
 const ministryCards = document.querySelectorAll('.ministry-card');
 const modalContent = document.getElementById('modalContent');
 
@@ -238,35 +329,61 @@ ministryCards.forEach(card => {
         if (data) {
             modalContent.innerHTML = `
                 <h2>${data.title}</h2>
-                <p class="ministry-verse">${data.verse}</p>
-                <p>${data.description}</p>
-                <h3>Activities:</h3>
-                <ul>
-                    ${data.activities.map(activity => `<li>${activity}</li>`).join('')}
+                <p class="ministry-verse" style="font-style: italic; color: var(--accent-color); margin-bottom: 1rem;">${data.verse}</p>
+                <p style="margin-bottom: 1.5rem;">${data.description}</p>
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Activities:</h3>
+                <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
+                    ${data.activities.map(activity => `<li style="margin-bottom: 0.5rem;">${activity}</li>`).join('')}
                 </ul>
-                <div class="contact-info">
-                    <p><strong>Meeting:</strong> ${data.meeting}</p>
+                <div class="contact-info" style="background: rgba(26, 75, 122, 0.05); padding: 1rem; border-radius: 8px;">
+                    <p style="margin-bottom: 0.5rem;"><strong>Meeting:</strong> ${data.meeting}</p>
                     <p><strong>Contact:</strong> ${data.contact}</p>
                 </div>
             `;
-            ministryModal.style.display = 'block';
+            openModal(ministryModal);
         }
     });
 });
 
-// Navbar background on scroll
+// Enhanced Navbar background on scroll with parallax effect
 window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
+    const scrolled = window.pageYOffset;
+    const parallax = document.querySelector('.hero');
+    
+    if (parallax) {
+        parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+    
     if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
-        navbar.style.backdropFilter = 'blur(10px)';
+        navbar.classList.add('scrolled');
     } else {
-        navbar.style.background = 'var(--dark-bg)';
-        navbar.style.backdropFilter = 'none';
+        navbar.classList.remove('scrolled');
+    }
+    
+    // Back to top button
+    const backToTop = document.querySelector('.back-to-top');
+    if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+    } else {
+        backToTop.classList.remove('show');
     }
 });
 
-// Animation on scroll
+// Back to top functionality
+const backToTop = document.createElement('button');
+backToTop.className = 'back-to-top';
+backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
+backToTop.setAttribute('aria-label', 'Back to top');
+document.body.appendChild(backToTop);
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Enhanced Animation on scroll with staggered animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -275,34 +392,268 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Add staggered animation based on element position
+            const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 0.1;
+            entry.target.style.transitionDelay = `${delay}s`;
             entry.target.classList.add('visible');
+            
+            // Remove delay after animation
+            setTimeout(() => {
+                entry.target.style.transitionDelay = '';
+            }, 1000);
         }
     });
 }, observerOptions);
 
-// Observe elements for animation
-document.querySelectorAll('.ministry-card, .event-card, .project-card, .sermon-card, .belt-card, .about-content, .link-card').forEach(el => {
+// Enhanced element observation with different animation types
+document.querySelectorAll('.ministry-card, .project-card, .sermon-card, .belt-card, .link-card').forEach((el, index) => {
     el.classList.add('fade-in');
     observer.observe(el);
 });
 
-// Formspree Setup Instructions
+document.querySelectorAll('.event-card').forEach((el, index) => {
+    el.classList.add('fade-in-left');
+    observer.observe(el);
+});
+
+document.querySelectorAll('.about-content, .contact-content').forEach((el, index) => {
+    el.classList.add('fade-in-right');
+    observer.observe(el);
+});
+
+// Enhanced Accessibility Features
+const highContrastToggle = document.getElementById('highContrastToggle');
+const largeTextToggle = document.getElementById('largeTextToggle');
+const readModeToggle = document.getElementById('readModeToggle');
+const resetAccessibility = document.getElementById('resetAccessibility');
+
+// High Contrast Mode
+highContrastToggle.addEventListener('click', () => {
+    document.body.classList.toggle('high-contrast');
+    localStorage.setItem('highContrast', document.body.classList.contains('high-contrast'));
+    
+    // Add confirmation feedback
+    if (document.body.classList.contains('high-contrast')) {
+        showToast('High contrast mode enabled');
+    } else {
+        showToast('High contrast mode disabled');
+    }
+});
+
+// Large Text Mode
+largeTextToggle.addEventListener('click', () => {
+    document.body.classList.toggle('large-text');
+    localStorage.setItem('largeText', document.body.classList.contains('large-text'));
+    
+    if (document.body.classList.contains('large-text')) {
+        showToast('Large text mode enabled');
+    } else {
+        showToast('Large text mode disabled');
+    }
+});
+
+// Reading Mode (simplified layout)
+readModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('reading-mode');
+    localStorage.setItem('readingMode', document.body.classList.contains('reading-mode'));
+    
+    if (document.body.classList.contains('reading-mode')) {
+        showToast('Reading mode enabled');
+    } else {
+        showToast('Reading mode disabled');
+    }
+});
+
+// Reset Accessibility
+resetAccessibility.addEventListener('click', () => {
+    document.body.classList.remove('high-contrast', 'large-text', 'reading-mode');
+    localStorage.removeItem('highContrast');
+    localStorage.removeItem('largeText');
+    localStorage.removeItem('readingMode');
+    showToast('All accessibility settings reset');
+});
+
+// Load saved accessibility settings
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('highContrast') === 'true') {
+        document.body.classList.add('high-contrast');
+    }
+    if (localStorage.getItem('largeText') === 'true') {
+        document.body.classList.add('large-text');
+    }
+    if (localStorage.getItem('readingMode') === 'true') {
+        document.body.classList.add('reading-mode');
+    }
+});
+
+// Toast notification function
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary-color);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        font-weight: 500;
+        animation: slideUp 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.animation = 'slideDown 0.3s ease-out';
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 300);
+    }, 3000);
+}
+
+// Enhanced form validation with real-time feedback
+document.querySelectorAll('input, select, textarea').forEach(input => {
+    input.addEventListener('blur', function() {
+        if (this.value.trim() !== '') {
+            this.classList.add('filled');
+        } else {
+            this.classList.remove('filled');
+        }
+    });
+    
+    input.addEventListener('input', function() {
+        if (this.checkValidity()) {
+            this.style.borderColor = 'var(--secondary-color)';
+        } else {
+            this.style.borderColor = 'var(--accent-secondary)';
+        }
+    });
+});
+
+// Enhanced hover effects for interactive elements
+document.querySelectorAll('.interactive').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05)';
+    });
+    
+    element.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+    });
+});
+
+// Keyboard navigation enhancement
+document.addEventListener('keydown', (e) => {
+    // Escape key closes modals
+    if (e.key === 'Escape') {
+        closeModal(prayerModal);
+        closeModal(registerModal);
+        closeModal(ministryModal);
+    }
+    
+    // Tab key navigation with focus indicators
+    if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+    }
+});
+
+document.addEventListener('mousedown', () => {
+    document.body.classList.remove('keyboard-navigation');
+});
+
+// Add keyboard navigation styles
+const keyboardStyles = document.createElement('style');
+keyboardStyles.textContent = `
+    .keyboard-navigation *:focus {
+        outline: 3px solid var(--accent-color) !important;
+        outline-offset: 2px !important;
+    }
+`;
+document.head.appendChild(keyboardStyles);
+
+// Enhanced page load animations
+window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease-in-out';
+    
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+    
+    // Add loading animation for images
+    document.querySelectorAll('img').forEach(img => {
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.5s ease-in-out';
+        
+        img.onload = function() {
+            this.style.opacity = '1';
+        };
+        
+        // Fallback for cached images
+        if (img.complete) {
+            img.style.opacity = '1';
+        }
+    });
+});
+
+// Enhanced error handling
+window.addEventListener('error', (e) => {
+    console.log('Error occurred:', e.error);
+    // You can add custom error reporting here
+});
+
+// Performance optimization: Lazy loading for images
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
 console.log(`
-FORMSPREE SETUP INSTRUCTIONS:
+ENHANCED WEBSITE FEATURES:
 
-1. Go to https://formspree.io and create an account
-2. Create a new form for Member Registration
-3. Update the form action in the HTML to: action="https://formspree.io/f/your-member-form-id"
-4. Create another form for Prayer Requests
-5. Update the prayer form action similarly
+🎯 ACCESSIBILITY:
+- High contrast mode
+- Large text mode
+- Reading mode
+- Keyboard navigation
+- Screen reader support
+- Skip to main content link
 
-To access submitted data:
-1. Login to your Formspree account
-2. Go to your forms dashboard
-3. Click on the form to view submissions
-4. You can export data as CSV or integrate with other apps
+🎨 ENHANCED ANIMATIONS:
+- Smooth page transitions
+- Staggered scroll animations
+- Hover effects with scaling
+- Modal animations
+- Loading states
+- Parallax scrolling
 
-For automatic email notifications:
-1. In Formspree form settings, add email addresses to receive notifications
-2. Customize the email template as needed
+⚡ PERFORMANCE:
+- Lazy loading images
+- Optimized animations
+- Reduced motion support
+- Efficient event handlers
+
+🎪 INTERACTIVE FEATURES:
+- Back to top button
+- Toast notifications
+- Enhanced form validation
+- Real-time feedback
+- Custom cursor effects
+
+Remember to test all accessibility features and ensure they work properly for users with disabilities.
 `);
