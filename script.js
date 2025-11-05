@@ -976,29 +976,3 @@ ENHANCED WEBSITE FEATURES:
 
 Remember to test all accessibility features and ensure they work properly for users with disabilities.
 `);
-// Add this to the end of your existing script.js file
-
-// Scroll to Top Functionality
-const backToTopButton = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('show');
-    } else {
-        backToTopButton.classList.remove('show');
-    }
-});
-
-backToTopButton.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Optional: Add keyboard support (press 'T' to scroll to top)
-document.addEventListener('keydown', (e) => {
-    if (e.key === 't' || e.key === 'T') {
-        backToTopButton.click();
-    }
-});
