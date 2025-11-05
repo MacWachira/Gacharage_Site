@@ -904,7 +904,7 @@ body.large-text p { font-size: 1.2rem; }
 }
 
 .ministry-card {
-    background: var(--white);
+    background: var(--black);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
