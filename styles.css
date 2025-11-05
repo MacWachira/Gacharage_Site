@@ -1,4 +1,4 @@
-/* Modern Church Website - Mamlaka Chapel Style Enhancement */
+/* Modern Church Website - Fixed Alignment */
 :root {
     --primary-color: #1a365d;
     --secondary-color: #2d3748;
@@ -17,65 +17,48 @@
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-/* Enhanced Hero Section - Clean Modern Look */
+/* Fix: Reset and Base Alignment */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* Fix: Container Alignment */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* Fix: Hero Section Alignment */
 .hero {
-    height: 90vh;
+    height: 100vh;
     min-height: 700px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
     text-align: center;
-    overflow: hidden;
     background: var(--gradient-primary);
-}
-
-.hero-slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: all 0.8s ease;
-}
-
-.slide.active {
-    opacity: 1;
-}
-
-.slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.slide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(26, 54, 93, 0.8) 0%, rgba(45, 55, 72, 0.6) 100%);
-    z-index: 1;
+    color: var(--white);
+    overflow: hidden;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     max-width: 800px;
-    padding: 0 2rem;
+    padding: 0 20px;
+    width: 100%;
 }
 
 .hero-title {
@@ -83,8 +66,7 @@
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    line-height: 1.1;
-    color: var(--white);
+    line-height: 1.2;
 }
 
 .hero-subtitle {
@@ -94,21 +76,23 @@
     font-weight: 400;
 }
 
-/* Enhanced Navigation */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Fix: Navigation Alignment */
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     background: rgba(26, 32, 44, 0.95);
     backdrop-filter: blur(20px);
     z-index: 1000;
-    transition: all 0.3s ease;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.navbar.scrolled {
-    background: rgba(26, 32, 44, 0.98);
-    box-shadow: var(--shadow-lg);
 }
 
 .nav-container {
@@ -126,42 +110,255 @@
     gap: 1rem;
 }
 
-.logo {
-    height: 45px;
-    width: auto;
-}
-
-.church-name {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    color: var(--white);
-    font-size: 1.3rem;
-}
-
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-link {
-    text-decoration: none;
     color: var(--white);
+    text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0;
-    opacity: 0.9;
+    transition: color 0.3s ease;
 }
 
 .nav-link:hover {
     color: var(--accent-color);
-    opacity: 1;
 }
 
-/* Enhanced Button Styles */
-.cta-button {
-    padding: 1rem 2.5rem;
+/* Fix: Prayer Banner Alignment */
+.prayer-banner {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: 80px;
+    width: 100%;
+}
+
+/* Fix: Section Alignment */
+.quick-links,
+.about-section,
+.ministries-section,
+.events-section,
+.development-section,
+.sermons-section,
+.giving-section,
+.contact-section {
+    padding: 5rem 0;
+    width: 100%;
+}
+
+.about-section,
+.events-section,
+.sermons-section {
+    background: var(--light-bg);
+}
+
+.quick-links,
+.ministries-section,
+.development-section,
+.giving-section,
+.contact-section {
+    background: var(--white);
+}
+
+/* Fix: Section Headers */
+.section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.section-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    color: var(--text-light);
     font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Fix: Grid Alignment */
+.links-grid,
+.ministries-grid,
+.belts-grid,
+.projects-grid,
+.sermons-grid,
+.giving-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Fix: Card Alignment */
+.link-card,
+.ministry-card,
+.belt-card,
+.project-card,
+.sermon-card,
+.giving-option {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.link-card:hover,
+.ministry-card:hover,
+.belt-card:hover,
+.project-card:hover,
+.sermon-card:hover,
+.giving-option:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Fix: Image Alignment */
+.belt-card img,
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.belt-card,
+.project-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.belt-card h4,
+.project-card h3 {
+    padding: 1.5rem 1.5rem 0.5rem;
+    margin: 0;
+}
+
+.belt-card p,
+.project-card p {
+    padding: 0 1.5rem 1.5rem;
+    margin: 0;
+}
+
+/* Fix: About Section Alignment */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-image {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Fix: Events Section Alignment */
+.events-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.event-card {
+    display: flex;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.event-date {
+    background: var(--accent-color);
+    color: var(--text-dark);
+    padding: 1.5rem;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.event-content {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+/* Fix: Progress Bars */
+.progress-bar {
+    background: #e2e8f0;
+    border-radius: 10px;
+    height: 8px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.progress {
+    background: var(--gradient-accent);
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Fix: Footer Alignment */
+.footer {
+    background: var(--dark-bg);
+    color: var(--white);
+    padding: 4rem 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding: 0 20px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Fix: Button Alignment */
+.cta-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
     font-weight: 600;
     border: none;
     border-radius: 50px;
@@ -169,7 +366,8 @@
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
-    margin: 0 0.5rem;
+    text-align: center;
+    min-width: 160px;
 }
 
 .hero .cta-button {
@@ -182,7 +380,6 @@
     background: transparent;
     color: var(--white);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
 }
 
 .hero .cta-button.secondary {
@@ -196,309 +393,16 @@
     color: var(--text-dark);
 }
 
-/* Enhanced Sections */
-.quick-links,
-.ministries-section,
-.development-section,
-.giving-section,
-.contact-section {
-    padding: 5rem 0;
-    background: var(--white);
-}
-
-.about-section,
-.events-section,
-.sermons-section {
-    padding: 5rem 0;
-    background: var(--light-bg);
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 1rem;
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    position: relative;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--accent-color);
-    border-radius: 2px;
-}
-
-.section-intro {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 3rem;
-    color: var(--text-light);
-    font-size: 1.1rem;
-    line-height: 1.7;
-}
-
-/* Enhanced Card Styles */
-.links-grid,
-.ministries-grid,
-.projects-grid,
-.sermons-grid,
-.giving-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.link-card,
-.ministry-card,
-.project-card,
-.sermon-card,
-.giving-option {
-    background: var(--white);
-    border-radius: 15px;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-}
-
-.link-card::before,
-.ministry-card::before,
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--gradient-accent);
-}
-
-.link-card:hover,
-.ministry-card:hover,
-.project-card:hover,
-.sermon-card:hover,
-.giving-option:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
+/* Fix: Icons Alignment */
 .link-card i,
 .ministry-card i,
 .giving-option i {
     font-size: 2.5rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
-    transition: all 0.3s ease;
 }
 
-.link-card:hover i,
-.ministry-card:hover i,
-.giving-option:hover i {
-    color: var(--accent-color);
-    transform: scale(1.1);
-}
-
-.link-card h3,
-.ministry-card h3,
-.project-card h3,
-.sermon-card h3,
-.giving-option h3 {
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-.link-card p,
-.ministry-card p,
-.project-card p,
-.sermon-card p,
-.giving-option p {
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-/* Enhanced Image Containers */
-.about-image,
-.belt-card,
-.project-card {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
-
-.about-image img,
-.belt-card img,
-.project-card img {
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.about-image:hover img,
-.belt-card:hover img,
-.project-card:hover img {
-    transform: scale(1.05);
-}
-
-/* Enhanced Events Section */
-.events-timeline {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.event-card {
-    background: var(--white);
-    border-radius: 15px;
-    margin-bottom: 1.5rem;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border-left: 4px solid var(--accent-color);
-}
-
-.event-card:hover {
-    transform: translateX(5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.event-date {
-    background: var(--accent-color);
-    color: var(--text-dark);
-    padding: 1rem;
-    text-align: center;
-    font-weight: 700;
-}
-
-.event-content {
-    padding: 1.5rem;
-}
-
-.event-content h3 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-/* Enhanced Footer */
-.footer {
-    background: var(--dark-bg);
-    color: var(--white);
-    padding: 4rem 0 2rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 2rem;
-}
-
-.footer-section h4 {
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.footer-section p,
-.footer-section a {
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section a:hover {
-    color: var(--accent-color);
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.social-links a {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    background: var(--accent-color);
-    transform: translateY(-2px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/* Enhanced Progress Bars */
-.progress-bar {
-    background: #e2e8f0;
-    border-radius: 10px;
-    margin: 1rem 0;
-    height: 8px;
-    overflow: hidden;
-}
-
-.progress {
-    background: var(--gradient-accent);
-    height: 100%;
-    transition: width 1s ease;
-}
-
-.progress-text {
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-top: 0.5rem;
-}
-
-/* Prayer Banner Enhancement */
-.prayer-banner {
-    background: var(--primary-color);
-    color: var(--white);
-    padding: 1rem 0;
-    text-align: center;
-    margin-top: 80px;
-    font-weight: 500;
-}
-
-.prayer-banner a {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.prayer-banner a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive Design */
+/* Responsive Fixes */
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.5rem;
@@ -508,8 +412,9 @@
         font-size: 1.1rem;
     }
     
-    .section-title {
-        font-size: 2rem;
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
     
     .nav-menu {
@@ -518,22 +423,33 @@
     
     .hero-buttons {
         flex-direction: column;
-        gap: 1rem;
+        align-items: center;
     }
     
     .cta-button {
-        margin: 0.25rem 0;
         width: 100%;
         max-width: 250px;
     }
     
     .links-grid,
     .ministries-grid,
+    .belts-grid,
     .projects-grid,
     .sermons-grid,
     .giving-options {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        padding: 0 15px;
+    }
+    
+    .event-card {
+        flex-direction: column;
+    }
+    
+    .event-date {
+        min-width: auto;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
     }
 }
 
@@ -543,7 +459,7 @@
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .nav-container {
@@ -551,33 +467,32 @@
     }
     
     .container {
-        padding: 0 1rem;
+        padding: 0 15px;
     }
 }
 
-/* Utility Classes */
-.container {
+/* Ensure all content is properly aligned */
+.section-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 20px;
 }
 
-.text-center {
-    text-align: center;
+/* Fix text alignment in dark sections */
+.about-section,
+.events-section,
+.sermons-section {
+    color: var(--text-dark);
 }
 
-.mb-4 {
-    margin-bottom: 2rem;
+.about-section .section-title,
+.events-section .section-title,
+.sermons-section .section-title {
+    color: var(--text-dark);
 }
 
-/* Ensure all images are properly contained */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Smooth transitions for all interactive elements */
-* {
-    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+.about-section .section-intro,
+.events-section .section-intro,
+.sermons-section .section-intro {
+    color: var(--text-light);
 }
