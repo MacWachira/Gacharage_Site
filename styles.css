@@ -973,7 +973,7 @@ body::before {
 /* Enhanced Ministries Section */
 .ministries-section {
     padding: 5rem 0;
-    background: var(--light-bg);
+    background: var(--black);
     backdrop-filter: blur(5px);
 }
 
