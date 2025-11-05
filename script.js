@@ -78,6 +78,260 @@ function closeModal(modal) {
     }, 250);
 }
 
+// Enhanced Hero Slider Functionality
+class HeroSlider {
+    constructor() {
+        this.slides = document.querySelectorAll('.slide');
+        this.indicators = document.querySelectorAll('.indicator');
+        this.prevBtn = document.querySelector('.slider-nav.prev');
+        this.nextBtn = document.querySelector('.slider-nav.next');
+        this.currentSlide = 0;
+        this.slideInterval = null;
+        this.slideDuration = 5000; // 5 seconds
+        this.isAnimating = false;
+        
+        this.init();
+    }
+    
+    init() {
+        // Start automatic sliding
+        this.startAutoSlide();
+        
+        // Event listeners for navigation
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        
+        // Event listeners for indicators
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Pause on hover
+        const hero = document.querySelector('.hero');
+        hero.addEventListener('mouseenter', () => this.pauseAutoSlide());
+        hero.addEventListener('mouseleave', () => this.resumeAutoSlide());
+        
+        // Touch support for mobile
+        this.addTouchSupport();
+        
+        // Preload images for better performance
+        this.preloadImages();
+    }
+    
+    startAutoSlide() {
+        this.slideInterval = setInterval(() => {
+            this.nextSlide();
+        }, this.slideDuration);
+    }
+    
+    pauseAutoSlide() {
+        if (this.slideInterval) {
+            clearInterval(this.slideInterval);
+            this.slideInterval = null;
+        }
+    }
+    
+    resumeAutoSlide() {
+        if (!this.slideInterval) {
+            this.slideInterval = setInterval(() => {
+                this.nextSlide();
+            }, this.slideDuration);
+        }
+    }
+    
+    nextSlide() {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        const nextIndex = (this.currentSlide + 1) % this.slides.length;
+        this.changeSlide(nextIndex, 'next');
+    }
+    
+    prevSlide() {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        const prevIndex = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
+        this.changeSlide(prevIndex, 'prev');
+    }
+    
+    goToSlide(index) {
+        if (this.isAnimating || index === this.currentSlide) return;
+        
+        this.isAnimating = true;
+        const direction = index > this.currentSlide ? 'next' : 'prev';
+        this.changeSlide(index, direction);
+    }
+    
+    changeSlide(newIndex, direction) {
+        // Reset animation flag after transition
+        setTimeout(() => {
+            this.isAnimating = false;
+        }, 800);
+        
+        const currentSlide = this.slides[this.currentSlide];
+        const newSlide = this.slides[newIndex];
+        
+        // Add direction classes for animations
+        currentSlide.classList.add(direction);
+        newSlide.classList.add('active', direction);
+        
+        // Remove classes after animation
+        setTimeout(() => {
+            currentSlide.classList.remove('active', 'prev', 'next');
+            newSlide.classList.remove('prev', 'next');
+            
+            // Update current slide and indicators
+            this.currentSlide = newIndex;
+            this.updateIndicators();
+        }, 800);
+    }
+    
+    updateIndicators() {
+        this.indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === this.currentSlide);
+        });
+    }
+    
+    addTouchSupport() {
+        const slider = document.querySelector('.hero-slider');
+        let startX = 0;
+        let currentX = 0;
+        let isSwiping = false;
+        
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isSwiping = true;
+            this.pauseAutoSlide();
+        });
+        
+        slider.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            currentX = e.touches[0].clientX;
+        });
+        
+        slider.addEventListener('touchend', () => {
+            if (!isSwiping) return;
+            
+            const diff = startX - currentX;
+            const swipeThreshold = 50;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+            
+            isSwiping = false;
+            setTimeout(() => this.resumeAutoSlide(), 3000);
+        });
+    }
+    
+    preloadImages() {
+        this.slides.forEach(slide => {
+            const img = slide.querySelector('img');
+            if (img) {
+                const preloadImage = new Image();
+                preloadImage.src = img.src;
+                preloadImage.onload = () => {
+                    img.classList.add('loaded');
+                };
+            }
+        });
+    }
+}
+
+// Video placeholder functionality
+function initVideoPlaceholder() {
+    const videoSlide = document.querySelector('.slide[data-type="video"]');
+    const videoPlaceholder = videoSlide.querySelector('.video-placeholder');
+    
+    videoPlaceholder.addEventListener('click', () => {
+        // Replace placeholder with actual video
+        const videoHTML = `
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/your-video-id?autoplay=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        `;
+        
+        videoSlide.querySelector('.slide-content').innerHTML = videoHTML + '<div class="slide-overlay"></div>';
+        
+        // Add video styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .video-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+            }
+            
+            .video-container iframe {
+                width: 100%;
+                height: 100%;
+            }
+        `;
+        document.head.appendChild(style);
+    });
+}
+
+// Keyboard navigation for slider
+function addKeyboardNavigation() {
+    document.addEventListener('keydown', (e) => {
+        const hero = document.querySelector('.hero');
+        const isHeroVisible = hero.getBoundingClientRect().top < window.innerHeight && 
+                              hero.getBoundingClientRect().bottom > 0;
+        
+        if (isHeroVisible) {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                heroSlider.prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                heroSlider.nextSlide();
+            }
+        }
+    });
+}
+
+// Initialize the hero slider when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const heroSlider = new HeroSlider();
+    initVideoPlaceholder();
+    addKeyboardNavigation();
+    
+    // Make slider globally accessible
+    window.heroSlider = heroSlider;
+});
+
+// Enhanced image loading with error handling
+function enhanceImageLoading() {
+    const images = document.querySelectorAll('.slide-image');
+    
+    images.forEach(img => {
+        // Add loading attribute for native lazy loading
+        img.setAttribute('loading', 'lazy');
+        
+        // Error handling
+        img.addEventListener('error', function() {
+            console.warn('Failed to load image:', this.src);
+            // You can set a fallback image here
+            this.src = 'images/fallback-hero.jpg';
+        });
+    });
+}
+
+// Call this function after DOM load
+document.addEventListener('DOMContentLoaded', enhanceImageLoading);
 // Add slideDown animation
 const style = document.createElement('style');
 style.textContent = `
