@@ -41,6 +41,7 @@
                 <li class="nav-item"><a href="#events" class="nav-link">Events</a></li>
                 <li class="nav-item"><a href="#development" class="nav-link">Development</a></li>
                 <li class="nav-item"><a href="#sermons" class="nav-link">Sermons</a></li>
+                <li class="nav-item"><a href="#giving" class="nav-link">Give</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -138,6 +139,7 @@
         <div class="hero-buttons">
             <button class="cta-button" id="registerLink">Become a Member</button>
             <button class="cta-button secondary" id="prayerLink">Request Prayer</button>
+            <button class="cta-button tertiary" id="giveLink">Give</button>
         </div>
     </div>
 </section>
@@ -156,10 +158,10 @@
                     <h3>Prayer Request</h3>
                     <p>Submit your prayer requests and our team will pray for you</p>
                 </div>
-                <div class="link-card" id="quickEvents">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Upcoming Events</h3>
-                    <p>Check out our calendar of events and activities</p>
+                <div class="link-card" id="quickGive">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Give & Support</h3>
+                    <p>Support our ministry through various giving options</p>
                 </div>
                 <div class="link-card" id="quickSermons">
                     <i class="fas fa-video"></i>
@@ -409,6 +411,71 @@
         </div>
     </section>
 
+    <!-- Giving Section -->
+    <section id="giving" class="giving-section">
+        <div class="container">
+            <h2 class="section-title">Give & Support Our Ministry</h2>
+            <p class="section-intro">Your generous giving enables us to continue our mission of spreading the Gospel and serving our community. Choose from the following giving options.</p>
+            
+            <div class="giving-options">
+                <div class="giving-option">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>M-Pesa Giving</h3>
+                    <p>Quick and convenient mobile money transfers</p>
+                    <div class="giving-details">
+                        <h4>How to Give via M-Pesa:</h4>
+                        <ul>
+                            <li>Go to M-Pesa Menu</li>
+                            <li>Select Lipa Na M-Pesa</li>
+                            <li>Select Pay Bill</li>
+                            <li>Enter Business No: <strong>123456</strong></li>
+                            <li>Enter Account No: <strong>GACHARAGE</strong></li>
+                            <li>Enter Amount & PIN</li>
+                            <li>Confirm and Send</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="giving-option">
+                    <i class="fas fa-university"></i>
+                    <h3>Bank Transfer</h3>
+                    <p>Direct bank transfers for larger donations</p>
+                    <div class="giving-details">
+                        <h4>Bank Details:</h4>
+                        <ul>
+                            <li><strong>Bank:</strong> Equity Bank</li>
+                            <li><strong>Account Name:</strong> Gacharage Anglican Church</li>
+                            <li><strong>Account Number:</strong> 1234567890</li>
+                            <li><strong>Branch:</strong> Ruaka Branch</li>
+                            <li><strong>SWIFT Code:</strong> EQBLKENA</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="giving-option">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h3>In-Person Giving</h3>
+                    <p>Give during our Sunday services or visit our office</p>
+                    <div class="giving-details">
+                        <h4>Other Giving Methods:</h4>
+                        <ul>
+                            <li>Cash donations during services</li>
+                            <li>Cheque payments</li>
+                            <li>Monthly pledges</li>
+                            <li>Project-specific donations</li>
+                            <li>Material support for ministries</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." - 2 Corinthians 9:7</p>
+                <button class="cta-button tertiary" id="givingModalLink">Make a Pledge</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
@@ -456,6 +523,7 @@
                     <h3>Quick Actions</h3>
                     <a href="#" class="link-button" id="contactRegister">Member Registration</a>
                     <a href="#" class="link-button" id="contactPrayer">Prayer Request</a>
+                    <a href="#" class="link-button" id="contactGive">Give Now</a>
                     <a href="https://www.dimkessacco.com" target="_blank" class="link-button">Dimkess Sacco</a>
                     <a href="https://www.ackmtkenyasouth.org" target="_blank" class="link-button">ACK Mt Kenya South Diocese</a>
                 </div>
@@ -491,6 +559,7 @@
                         <li><a href="https://www.ackmtkenyasouth.org" target="_blank">ACK Mt Kenya South Diocese</a></li>
                         <li><a href="#ministries">Ministries</a></li>
                         <li><a href="#sermons">Sermons</a></li>
+                        <li><a href="#giving">Give</a></li>
                     </ul>
                 </div>
                 
@@ -640,6 +709,82 @@
                 
                 <button type="submit" class="submit-btn">Register Now</button>
                 <div class="form-success" id="memberSuccess">Thank you for registering! We will contact you soon.</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Giving Modal -->
+    <div id="giveModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Make a Pledge or Donation</h2>
+            <p>Your generous giving supports our ministry and community outreach programs.</p>
+            <form id="giveForm" action="https://formspree.io/f/xvojepwq" method="POST">
+                <input type="hidden" name="_subject" value="Giving Pledge - Gacharage Church">
+                
+                <div class="form-group">
+                    <label for="giveName">Your Name *</label>
+                    <input type="text" id="giveName" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="giveEmail">Email Address *</label>
+                    <input type="email" id="giveEmail" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="givePhone">Phone Number *</label>
+                    <input type="tel" id="givePhone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="giveType">Type of Giving</label>
+                    <select id="giveType" name="giveType">
+                        <option value="">Select giving type</option>
+                        <option value="tithes">Tithes</option>
+                        <option value="offering">Offering</option>
+                        <option value="building-fund">Building Fund</option>
+                        <option value="missions">Missions Support</option>
+                        <option value="benevolence">Benevolence Fund</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="giveAmount">Amount (Optional)</label>
+                    <input type="number" id="giveAmount" name="amount" placeholder="Enter amount in KSh">
+                </div>
+
+                <div class="form-group">
+                    <label for="giveFrequency">Giving Frequency</label>
+                    <select id="giveFrequency" name="frequency">
+                        <option value="">Select frequency</option>
+                        <option value="one-time">One-time Gift</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="annually">Annually</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="giveMethod">Preferred Giving Method</label>
+                    <select id="giveMethod" name="method">
+                        <option value="">Select method</option>
+                        <option value="mpesa">M-Pesa</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="cash">Cash</option>
+                        <option value="cheque">Cheque</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="giveMessage">Additional Message (Optional)</label>
+                    <textarea id="giveMessage" name="message" placeholder="Any specific instructions or comments..." rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Pledge</button>
+                <div class="form-success" id="giveSuccess">Thank you for your generous pledge! We will contact you with further details.</div>
             </form>
         </div>
     </div>
