@@ -56,29 +56,41 @@
     padding: 0 2rem;
 }
 
-/* Specific background images for each section */
-.hero-parallax {
-    background-image: url('media/hero-bg.jpg');
+/* Add background images to existing sections */
+.about-section {
+    background: 
+        linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
+        url('media/about-bg.jpg') center/cover fixed;
+    color: white;
+    position: relative;
 }
 
-.about-parallax {
-    background-image: url('media/about-bg.jpg');
+.ministries-section {
+    background: 
+        linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
+        url('media/ministries-bg.jpg') center/cover fixed;
+    color: white;
 }
 
-.ministries-parallax {
-    background-image: url('media/ministries-bg.jpg');
+.events-section {
+    background: 
+        linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
+        url('media/events-bg.jpg') center/cover fixed;
+    color: white;
 }
 
-.events-parallax {
-    background-image: url('media/events-bg.jpg');
+.giving-section {
+    background: 
+        linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
+        url('media/giving-bg.jpg') center/cover fixed;
+    color: white;
 }
 
-.giving-parallax {
-    background-image: url('media/giving-bg.jpg');
-}
-
-.contact-parallax {
-    background-image: url('media/contact-bg.jpg');
+.contact-section {
+    background: 
+        linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
+        url('media/contact-bg.jpg') center/cover fixed;
+    color: white;
 }
 
 /* Main background for the entire site */
