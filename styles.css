@@ -186,19 +186,30 @@ body.large-text h2 { font-size: 2.4rem; }
 body.large-text h3 { font-size: 2rem; }
 body.large-text p { font-size: 1.2rem; }
 
-/* Remove blueish effect from hero section */
-.hero {
-    background: transparent;
-}
-
+/* Make overlay very subtle instead of completely removing */
 .slide-overlay {
     background: linear-gradient(
         135deg,
-        rgba(0, 0, 0, 0.6) 0%,
-        rgba(0, 0, 0, 0.4) 50%,
-        rgba(0, 0, 0, 0.6) 100%
-    );
+        rgba(0, 0, 0, 0.2) 0%,  /* Reduced from 0.8 to 0.2 */
+        rgba(0, 0, 0, 0.1) 50%, /* Reduced from 0.7 to 0.1 */
+        rgba(0, 0, 0, 0.2) 100% /* Reduced from 0.8 to 0.2 */
+    ) !important;
 }
+
+/* For parallax sections */
+.parallax-overlay {
+    background: rgba(0, 0, 0, 0.2) !important; /* Very subtle dark overlay */
+}
+
+/* Remove blue tint from body */
+body {
+    background: url('media/church-background.jpg') center/cover fixed !important;
+}
+
+body::before {
+    background: transparent !important;
+}
+
 /* Enhanced Hero Section with Slider */
 .hero {
     height: 80vh;
