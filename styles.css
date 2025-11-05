@@ -949,7 +949,7 @@ body::before {
 .about-image {
     position: relative;
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 75px;
     box-shadow: var(--shadow-hover);
     transform: perspective(1000px) rotateY(-5deg);
     transition: var(--transition);
