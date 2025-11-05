@@ -7,6 +7,7 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
     
+    // Add animation delay for menu items
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach((item, index) => {
         if (navMenu.classList.contains('active')) {
@@ -440,37 +441,159 @@ document.head.appendChild(pulseStyle);
 const prayerForm = document.getElementById('prayerForm');
 const prayerSuccess = document.getElementById('prayerSuccess');
 
-prayerForm.addEventListener('submit', (e) => {
+prayerForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    // Simulate form submission
-    prayerSuccess.classList.add('show');
-    prayerForm.reset();
-    setTimeout(() => prayerSuccess.classList.remove('show'), 3000);
+    
+    // Enhanced loading state
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
+    submitBtn.disabled = true;
+    
+    // Add loading animation to form
+    this.style.opacity = '0.7';
+    
+    // Formspree submission
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            prayerSuccess.classList.add('show');
+            this.reset();
+            this.style.opacity = '1';
+            
+            setTimeout(() => {
+                prayerSuccess.classList.remove('show');
+                closeModal(prayerModal);
+            }, 3000);
+        } else {
+            throw new Error('Network response was not ok');
+        }
+    }).catch(error => {
+        alert('There was a problem submitting your request. Please try again.');
+        this.style.opacity = '1';
+    }).finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
 });
 
-// Similar for other forms...
+const memberForm = document.getElementById('memberForm');
+const memberSuccess = document.getElementById('memberSuccess');
 
-// Ministry modal data
+memberForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Enhanced loading state
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span>Registering...';
+    submitBtn.disabled = true;
+    
+    // Add loading animation to form
+    this.style.opacity = '0.7';
+    
+    // Formspree submission
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            memberSuccess.classList.add('show');
+            this.reset();
+            this.style.opacity = '1';
+            
+            setTimeout(() => {
+                memberSuccess.classList.remove('show');
+                closeModal(registerModal);
+            }, 3000);
+        } else {
+            throw new Error('Network response was not ok');
+        }
+    }).catch(error => {
+        alert('There was a problem submitting your registration. Please try again.');
+        this.style.opacity = '1';
+    }).finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+});
+
+const giveForm = document.getElementById('giveForm');
+const giveSuccess = document.getElementById('giveSuccess');
+
+giveForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Enhanced loading state
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
+    submitBtn.disabled = true;
+    
+    // Add loading animation to form
+    this.style.opacity = '0.7';
+    
+    // Formspree submission
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            giveSuccess.classList.add('show');
+            this.reset();
+            this.style.opacity = '1';
+            
+            setTimeout(() => {
+                giveSuccess.classList.remove('show');
+                closeModal(giveModal);
+            }, 3000);
+        } else {
+            throw new Error('Network response was not ok');
+        }
+    }).catch(error => {
+        alert('There was a problem submitting your pledge. Please try again.');
+        this.style.opacity = '1';
+    }).finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+});
+
+// Enhanced Ministry Modals with animations
+const ministryCards = document.querySelectorAll('.ministry-card');
+const modalContent = document.getElementById('modalContent');
+
 const ministryData = {
     youth: {
         title: 'Youth Ministry',
-        description: 'Engaging young people aged 18-35 in spiritual growth, fellowship, and service. We organize retreats, bible studies, and community outreach programs.',
-        activities: ['Bible Study', 'Worship Nights', 'Sports Activities', 'Leadership Training', 'Community Service'],
-        contact: 'Youth Leader: John Doe - 0722 123 456',
+        description: 'Our Youth Ministry is dedicated to engaging young people aged 18-35 in spiritual growth, fellowship, and service. We provide a safe space for youth to explore their faith and develop leadership skills.',
+        activities: ['Weekly Bible Study', 'Youth Fellowship', 'Mentorship Programs', 'Community Service', 'Career Development Workshops'],
+        contact: 'Youth Leader: John Mwangi - 0721 123 456',
         meeting: 'Fridays, 6:00 PM - Youth Hall',
         verse: '"Don\'t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity." - 1 Timothy 4:12'
     },
     choir: {
-        title: 'Choir',
-        description: 'Praising God through music and worship. Our choir leads worship in Sunday services and special events.',
-        activities: ['Rehearsals', 'Special Performances', 'Recording Sessions', 'Music Workshops'],
-        contact: 'Choir Director: Jane Smith - 0733 456 789',
+        title: 'Choir Ministry',
+        description: 'The Choir Ministry leads the congregation in worship through music and song. We practice weekly and perform during Sunday services and special events. Our choir includes vocalists and instrumentalists of all skill levels.',
+        activities: ['Weekly Practice', 'Sunday Worship', 'Special Events', 'Music Workshops', 'Community Outreach Concerts'],
+        contact: 'Choir Director: Mary Wanjiku - 0733 456 789',
         meeting: 'Thursdays, 5:00 PM - Choir Room',
-        verse: '"Sing to the Lord a new song; sing to the Lord, all the earth." - Psalm 96:1'
+        verse: '"Sing to the LORD a new song; sing to the LORD, all the earth." - Psalm 96:1'
     },
     teens: {
         title: 'Teens Ministry',
-        description: 'Guiding teenagers (13-17 years) in their faith journey through teachings, fellowship, and fun activities. We address issues facing teens today from a biblical perspective.',
+        description: 'Guiding teenagers (13-17 years) in their faith journey through relevant teachings, fellowship, and fun activities. We address issues facing teens today from a biblical perspective.',
         activities: ['Sunday School', 'Teen Retreats', 'Bible Quizzes', 'Career Guidance', 'Life Skills Training'],
         contact: 'Teens Coordinator: David Kimani - 0712 345 678',
         meeting: 'Sundays, 10:30 AM - Teens Room',
@@ -509,9 +632,6 @@ const ministryData = {
         verse: '"Therefore, since we are surrounded by such a great cloud of witnesses, let us throw off everything that hinders and the sin that so easily entangles." - Hebrews 12:1'
     }
 };
-
-const ministryCards = document.querySelectorAll('.ministry-card');
-const modalContent = document.getElementById('modalContent');
 
 ministryCards.forEach(card => {
     card.addEventListener('click', () => {
@@ -562,7 +682,12 @@ window.addEventListener('scroll', () => {
 });
 
 // Back to top functionality
-const backToTop = document.querySelector('.back-to-top');
+const backToTop = document.createElement('button');
+backToTop.className = 'back-to-top';
+backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
+backToTop.setAttribute('aria-label', 'Back to top');
+document.body.appendChild(backToTop);
+
 backToTop.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
