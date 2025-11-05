@@ -30,9 +30,7 @@ body {
     color: var(--text-dark);
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background: 
-        linear-gradient(rgba(30, 58, 95, 0.1), rgba(30, 58, 95, 0.1)),
-        url('media/church-background.jpg') center/cover fixed;
+    background: url('media/church-background.jpg') center/cover fixed;
     background-attachment: fixed;
     position: relative;
 }
@@ -47,9 +45,9 @@ body::before {
     background: 
         linear-gradient(
             135deg,
-            rgba(30, 58, 95, 0.1) 0%,
-            rgba(30, 58, 95, 0.05) 50%,
-            rgba(30, 58, 95, 0.1) 100%
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0.1) 100%
         );
     z-index: -1;
 }
@@ -64,57 +62,13 @@ body::before {
     width: 100%;
     z-index: 3000;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     font-size: 0.9rem;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 2rem;
 }
-
-.accessibility-btn {
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 0.8rem;
-}
-
-.accessibility-btn:hover {
-    background: var(--accent-color);
-    color: var(--dark-bg);
-}
-
-/* High Contrast Mode */
-body.high-contrast {
-    --primary-color: #000000;
-    --secondary-color: #000080;
-    --accent-color: #ffff00;
-    --text-dark: #000000;
-    --text-light: #333333;
-    --white: #ffffff;
-    --light-bg: #ffffff;
-    --dark-bg: #000000;
-    color: #000000 !important;
-    background: #ffffff !important;
-}
-
-body.high-contrast * {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border-color: #000000 !important;
-}
-
-body.large-text {
-    font-size: 120%;
-}
-
-body.large-text h1 { font-size: 2.8rem; }
-body.large-text h2 { font-size: 2.4rem; }
-body.large-text h3 { font-size: 2rem; }
-body.large-text p { font-size: 1.2rem; }
 
 /* Enhanced Hero Section with Slider */
 .hero {
@@ -126,62 +80,7 @@ body.large-text p { font-size: 1.2rem; }
     color: var(--white);
     text-align: center;
     overflow: hidden;
-    background: var(--dark-bg);
-}
-
-.hero-slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transform: translateX(100%);
-    transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 1;
-}
-
-.slide.active {
-    opacity: 1;
-    transform: translateX(0);
-    z-index: 2;
-}
-
-.slide.prev {
-    transform: translateX(-100%);
-    opacity: 0;
-}
-
-.slide.next {
-    transform: translateX(100%);
-    opacity: 0;
-}
-
-.slide-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 8s ease-out;
-}
-
-.slide.active .slide-image {
-    transform: scale(1.1);
+    background: transparent;
 }
 
 .slide-overlay {
@@ -192,13 +91,26 @@ body.large-text p { font-size: 1.2rem; }
     height: 100%;
     background: linear-gradient(
         135deg,
-        rgba(30, 58, 95, 0.85) 0%,
-        rgba(30, 58, 95, 0.7) 50%,
-        rgba(30, 58, 95, 0.85) 100%
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.6) 100%
     );
     z-index: 1;
 }
 
+/* Enhanced Development Section - Make text black */
+.project-card p {
+    padding: 0 1rem;
+    color: #000000;
+    line-height: 1.6;
+}
+
+.progress-text {
+    padding: 0 1rem 1rem;
+    display: block;
+    font-weight: 600;
+    color: #000000;
+}
 /* Video Placeholder */
 .video-placeholder {
     position: absolute;
