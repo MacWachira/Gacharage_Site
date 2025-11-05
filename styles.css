@@ -64,7 +64,7 @@ body::before {
     width: 100%;
     z-index: 3000;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     font-size: 0.9rem;
     backdrop-filter: blur(10px);
