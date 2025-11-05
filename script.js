@@ -50,10 +50,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Modal functionality with enhanced animations
 const prayerModal = document.getElementById('prayerModal');
 const registerModal = document.getElementById('registerModal');
+const giveModal = document.getElementById('giveModal');
 const ministryModal = document.getElementById('ministryModal');
 
 const prayerLinks = document.querySelectorAll('#prayerRequestLink, #prayerLink, #quickPrayer, #contactPrayer');
 const registerLinks = document.querySelectorAll('#registerLink, #quickRegister, #contactRegister');
+const giveLinks = document.querySelectorAll('#giveLink, #quickGive, #contactGive, #givingModalLink');
 
 const closeButtons = document.querySelectorAll('.close-modal');
 
@@ -332,6 +334,7 @@ function enhanceImageLoading() {
 
 // Call this function after DOM load
 document.addEventListener('DOMContentLoaded', enhanceImageLoading);
+
 // Add slideDown animation
 const style = document.createElement('style');
 style.textContent = `
@@ -364,6 +367,14 @@ registerLinks.forEach(link => {
     });
 });
 
+// Open give modal
+giveLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(giveModal);
+    });
+});
+
 // Close modals
 closeButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -379,6 +390,9 @@ window.addEventListener('click', (e) => {
     }
     if (e.target === registerModal) {
         closeModal(registerModal);
+    }
+    if (e.target === giveModal) {
+        closeModal(giveModal);
     }
     if (e.target === ministryModal) {
         closeModal(ministryModal);
@@ -512,6 +526,50 @@ memberForm.addEventListener('submit', function(e) {
     });
 });
 
+const giveForm = document.getElementById('giveForm');
+const giveSuccess = document.getElementById('giveSuccess');
+
+giveForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Enhanced loading state
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
+    submitBtn.disabled = true;
+    
+    // Add loading animation to form
+    this.style.opacity = '0.7';
+    
+    // Formspree submission
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            giveSuccess.classList.add('show');
+            this.reset();
+            this.style.opacity = '1';
+            
+            setTimeout(() => {
+                giveSuccess.classList.remove('show');
+                closeModal(giveModal);
+            }, 3000);
+        } else {
+            throw new Error('Network response was not ok');
+        }
+    }).catch(error => {
+        alert('There was a problem submitting your pledge. Please try again.');
+        this.style.opacity = '1';
+    }).finally(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+});
+
 // Enhanced Ministry Modals with animations
 const ministryCards = document.querySelectorAll('.ministry-card');
 const modalContent = document.getElementById('modalContent');
@@ -589,7 +647,7 @@ ministryCards.forEach(card => {
                 <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem;">
                     ${data.activities.map(activity => `<li style="margin-bottom: 0.5rem;">${activity}</li>`).join('')}
                 </ul>
-                <div class="contact-info" style="background: rgba(26, 75, 122, 0.05); padding: 1rem; border-radius: 8px;">
+                <div class="contact-info" style="background: rgba(30, 58, 95, 0.05); padding: 1rem; border-radius: 8px;">
                     <p style="margin-bottom: 0.5rem;"><strong>Meeting:</strong> ${data.meeting}</p>
                     <p><strong>Contact:</strong> ${data.contact}</p>
                 </div>
@@ -660,7 +718,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Enhanced element observation with different animation types
-document.querySelectorAll('.ministry-card, .project-card, .sermon-card, .belt-card, .link-card').forEach((el, index) => {
+document.querySelectorAll('.ministry-card, .project-card, .sermon-card, .belt-card, .link-card, .giving-option').forEach((el, index) => {
     el.classList.add('fade-in');
     observer.observe(el);
 });
@@ -781,9 +839,9 @@ document.querySelectorAll('input, select, textarea').forEach(input => {
     
     input.addEventListener('input', function() {
         if (this.checkValidity()) {
-            this.style.borderColor = 'var(--secondary-color)';
+            this.style.borderColor = 'var(--success-color)';
         } else {
-            this.style.borderColor = 'var(--accent-secondary)';
+            this.style.borderColor = 'var(--accent-color)';
         }
     });
 });
@@ -805,6 +863,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeModal(prayerModal);
         closeModal(registerModal);
+        closeModal(giveModal);
         closeModal(ministryModal);
     }
     
@@ -908,6 +967,12 @@ ENHANCED WEBSITE FEATURES:
 - Enhanced form validation
 - Real-time feedback
 - Custom cursor effects
+
+💰 GIVING SECTION:
+- M-Pesa giving options
+- Bank transfer details
+- In-person giving information
+- Pledge form
 
 Remember to test all accessibility features and ensure they work properly for users with disabilities.
 `);
