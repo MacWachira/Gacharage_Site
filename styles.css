@@ -60,7 +60,7 @@
 .about-section {
     background: 
         linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
-        url('media/about-bg.jpg') center/cover fixed;
+        url('media/cross-with-bible-candle-old-oak-wooden-table.jpg') center/cover fixed;
     color: white;
     position: relative;
 }
@@ -68,28 +68,28 @@
 .ministries-section {
     background: 
         linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
-        url('media/ministries-bg.jpg') center/cover fixed;
+        url('media/top-view-paper-dove-with-envelope-copy-space.jpg') center/cover fixed;
     color: white;
 }
 
 .events-section {
     background: 
         linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
-        url('media/events-bg.jpg') center/cover fixed;
+        url('media/copy-space-holy-cross-necklace-with-bread.jpg') center/cover fixed;
     color: white;
 }
 
 .giving-section {
     background: 
         linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
-        url('media/giving-bg.jpg') center/cover fixed;
+        url('media/preview.jpg') center/cover fixed;
     color: white;
 }
 
 .contact-section {
     background: 
         linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
-        url('media/contact-bg.jpg') center/cover fixed;
+        url('media/hero4.jpg') center/cover fixed;
     color: white;
 }
 
