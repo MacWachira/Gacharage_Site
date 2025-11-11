@@ -125,7 +125,7 @@ body::before {
 }
 
 /* Accessibility Features */
-/*.accessibility-bar {
+.accessibility-bar {
     background: var(--secondary-color);
     color: var(--white);
     padding: 0.5rem 0;
