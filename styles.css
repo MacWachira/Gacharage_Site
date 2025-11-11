@@ -209,6 +209,64 @@ body {
 body::before {
     background: transparent !important;
 }
+/* Enhanced Navigation - Transparent/Blurred */
+.navbar {
+    position: fixed;
+    top: 40px;
+    width: 100%;
+    background: rgba(30, 58, 95, 0.1); /* Transparent background */
+    box-shadow: none; /* Remove shadow for cleaner look */
+    z-index: 1000;
+    transition: var(--transition-slow);
+    backdrop-filter: blur(15px); /* Increased blur effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Subtle border */
+}
+
+.navbar.scrolled {
+    background: rgba(30, 58, 95, 0.85); /* More opaque when scrolled */
+    backdrop-filter: blur(25px); /* Stronger blur when scrolled */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Make accessibility bar transparent/blurred too */
+.accessibility-bar {
+    background: rgba(45, 78, 120, 0.1);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Adjust prayer banner position */
+.prayer-banner {
+    margin-top: 110px;
+    background: rgba(45, 78, 120, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+/* Enhanced mobile menu transparency */
+@media (max-width: 768px) {
+    .nav-menu {
+        background: rgba(30, 58, 95, 0.95);
+        backdrop-filter: blur(25px);
+    }
+    
+    .navbar {
+        top: 60px;
+    }
+}
+
+/* Optional: Make navbar completely transparent on hero section */
+.navbar.transparent {
+    background: rgba(30, 58, 95, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar.transparent.scrolled {
+    background: rgba(30, 58, 95, 0.85);
+    backdrop-filter: blur(25px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
 
 /* Enhanced Hero Section with Slider */
 .hero {
