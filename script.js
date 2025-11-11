@@ -80,6 +80,25 @@ function closeModal(modal) {
     }, 250);
 }
 
+// Add this to your existing JavaScript
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    const hero = document.querySelector('.hero');
+    const heroHeight = hero.offsetHeight;
+    
+    if (window.scrollY < heroHeight - 100) {
+        navbar.classList.add('transparent');
+    } else {
+        navbar.classList.remove('transparent');
+    }
+    
+    // Existing scroll functionality
+    if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
 // Enhanced Hero Slider Functionality
 class HeroSlider {
     constructor() {
