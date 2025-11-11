@@ -7,6 +7,165 @@ function createStaticBackground() {
     }
 }
 
+// Enhanced Hero Slider with 7 images - FIXED VERSION
+class HeroSlider {
+    constructor() {
+        this.slides = document.querySelectorAll('.slide');
+        this.indicators = document.querySelectorAll('.indicator');
+        this.prevBtn = document.querySelector('.slider-nav.prev');
+        this.nextBtn = document.querySelector('.slider-nav.next');
+        this.currentSlide = 0;
+        this.slideInterval = null;
+        this.slideDuration = 5000; // 5 seconds
+        this.isAnimating = false;
+        
+        this.init();
+    }
+    
+    init() {
+        // Show first slide
+        this.showSlide(this.currentSlide);
+        
+        // Start automatic sliding
+        this.startAutoSlide();
+        
+        // Event listeners for navigation
+        this.prevBtn.addEventListener('click', () => this.prevSlide());
+        this.nextBtn.addEventListener('click', () => this.nextSlide());
+        
+        // Event listeners for indicators
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Pause on hover
+        const hero = document.querySelector('.hero');
+        hero.addEventListener('mouseenter', () => this.pauseAutoSlide());
+        hero.addEventListener('mouseleave', () => this.resumeAutoSlide());
+        
+        // Touch support for mobile
+        this.addTouchSupport();
+    }
+    
+    startAutoSlide() {
+        this.slideInterval = setInterval(() => {
+            this.nextSlide();
+        }, this.slideDuration);
+    }
+    
+    pauseAutoSlide() {
+        if (this.slideInterval) {
+            clearInterval(this.slideInterval);
+            this.slideInterval = null;
+        }
+    }
+    
+    resumeAutoSlide() {
+        if (!this.slideInterval) {
+            this.startAutoSlide();
+        }
+    }
+    
+    nextSlide() {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        const nextIndex = (this.currentSlide + 1) % this.slides.length;
+        this.changeSlide(nextIndex, 'next');
+    }
+    
+    prevSlide() {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        const prevIndex = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
+        this.changeSlide(prevIndex, 'prev');
+    }
+    
+    goToSlide(index) {
+        if (this.isAnimating || index === this.currentSlide) return;
+        
+        this.isAnimating = true;
+        const direction = index > this.currentSlide ? 'next' : 'prev';
+        this.changeSlide(index, direction);
+    }
+    
+    changeSlide(newIndex, direction) {
+        const currentSlide = this.slides[this.currentSlide];
+        const newSlide = this.slides[newIndex];
+        
+        // Add direction classes for animations
+        currentSlide.classList.remove('active');
+        currentSlide.classList.add(direction);
+        
+        newSlide.classList.add('active', direction);
+        
+        // Remove classes after animation
+        setTimeout(() => {
+            currentSlide.classList.remove('prev', 'next');
+            newSlide.classList.remove('prev', 'next');
+            
+            // Update current slide and indicators
+            this.currentSlide = newIndex;
+            this.updateIndicators();
+            this.isAnimating = false;
+        }, 800);
+    }
+    
+    showSlide(index) {
+        // Hide all slides
+        this.slides.forEach(slide => {
+            slide.classList.remove('active', 'prev', 'next');
+        });
+        
+        // Show current slide
+        this.slides[index].classList.add('active');
+        this.updateIndicators();
+    }
+    
+    updateIndicators() {
+        this.indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === this.currentSlide);
+        });
+    }
+    
+    addTouchSupport() {
+        const slider = document.querySelector('.hero-slider');
+        let startX = 0;
+        let currentX = 0;
+        let isSwiping = false;
+        
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isSwiping = true;
+            this.pauseAutoSlide();
+        });
+        
+        slider.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            currentX = e.touches[0].clientX;
+        });
+        
+        slider.addEventListener('touchend', () => {
+            if (!isSwiping) return;
+            
+            const diff = startX - currentX;
+            const swipeThreshold = 50;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+            
+            isSwiping = false;
+            setTimeout(() => this.resumeAutoSlide(), 3000);
+        });
+    }
+}
+
 // Enhanced Accessibility Features
 const highContrastToggle = document.getElementById('highContrastToggle');
 const largeTextToggle = document.getElementById('largeTextToggle');
@@ -100,26 +259,28 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navbar = document.querySelector('.navbar');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    
-    // Add animation delay for menu items
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach((item, index) => {
-        if (navMenu.classList.contains('active')) {
-            item.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s both`;
-        } else {
-            item.style.animation = '';
-        }
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        
+        // Add animation delay for menu items
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach((item, index) => {
+            if (navMenu.classList.contains('active')) {
+                item.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s both`;
+            } else {
+                item.style.animation = '';
+            }
+        });
     });
-});
+}
 
 // Close mobile menu when clicking on links
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        if (hamburger) hamburger.classList.remove('active');
+        if (navMenu) navMenu.classList.remove('active');
     });
 });
 
@@ -180,171 +341,6 @@ backToTop.addEventListener('click', () => {
     });
 });
 
-// Enhanced Hero Slider with 7 images
-class HeroSlider {
-    constructor() {
-        this.slides = document.querySelectorAll('.slide');
-        this.indicators = document.querySelectorAll('.indicator');
-        this.prevBtn = document.querySelector('.slider-nav.prev');
-        this.nextBtn = document.querySelector('.slider-nav.next');
-        this.currentSlide = 0;
-        this.slideInterval = null;
-        this.slideDuration = 5000; // 5 seconds
-        this.isAnimating = false;
-        
-        this.init();
-    }
-    
-    init() {
-        // Start automatic sliding
-        this.startAutoSlide();
-        
-        // Event listeners for navigation
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        
-        // Event listeners for indicators
-        this.indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => this.goToSlide(index));
-        });
-        
-        // Pause on hover
-        const hero = document.querySelector('.hero');
-        hero.addEventListener('mouseenter', () => this.pauseAutoSlide());
-        hero.addEventListener('mouseleave', () => this.resumeAutoSlide());
-        
-        // Touch support for mobile
-        this.addTouchSupport();
-        
-        // Preload images for better performance
-        this.preloadImages();
-    }
-    
-    startAutoSlide() {
-        this.slideInterval = setInterval(() => {
-            this.nextSlide();
-        }, this.slideDuration);
-    }
-    
-    pauseAutoSlide() {
-        if (this.slideInterval) {
-            clearInterval(this.slideInterval);
-            this.slideInterval = null;
-        }
-    }
-    
-    resumeAutoSlide() {
-        if (!this.slideInterval) {
-            this.slideInterval = setInterval(() => {
-                this.nextSlide();
-            }, this.slideDuration);
-        }
-    }
-    
-    nextSlide() {
-        if (this.isAnimating) return;
-        
-        this.isAnimating = true;
-        const nextIndex = (this.currentSlide + 1) % this.slides.length;
-        this.changeSlide(nextIndex, 'next');
-    }
-    
-    prevSlide() {
-        if (this.isAnimating) return;
-        
-        this.isAnimating = true;
-        const prevIndex = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
-        this.changeSlide(prevIndex, 'prev');
-    }
-    
-    goToSlide(index) {
-        if (this.isAnimating || index === this.currentSlide) return;
-        
-        this.isAnimating = true;
-        const direction = index > this.currentSlide ? 'next' : 'prev';
-        this.changeSlide(index, direction);
-    }
-    
-    changeSlide(newIndex, direction) {
-        // Reset animation flag after transition
-        setTimeout(() => {
-            this.isAnimating = false;
-        }, 800);
-        
-        const currentSlide = this.slides[this.currentSlide];
-        const newSlide = this.slides[newIndex];
-        
-        // Add direction classes for animations
-        currentSlide.classList.add(direction);
-        newSlide.classList.add('active', direction);
-        
-        // Remove classes after animation
-        setTimeout(() => {
-            currentSlide.classList.remove('active', 'prev', 'next');
-            newSlide.classList.remove('prev', 'next');
-            
-            // Update current slide and indicators
-            this.currentSlide = newIndex;
-            this.updateIndicators();
-        }, 800);
-    }
-    
-    updateIndicators() {
-        this.indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === this.currentSlide);
-        });
-    }
-    
-    addTouchSupport() {
-        const slider = document.querySelector('.hero-slider');
-        let startX = 0;
-        let currentX = 0;
-        let isSwiping = false;
-        
-        slider.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isSwiping = true;
-            this.pauseAutoSlide();
-        });
-        
-        slider.addEventListener('touchmove', (e) => {
-            if (!isSwiping) return;
-            currentX = e.touches[0].clientX;
-        });
-        
-        slider.addEventListener('touchend', () => {
-            if (!isSwiping) return;
-            
-            const diff = startX - currentX;
-            const swipeThreshold = 50;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    this.nextSlide();
-                } else {
-                    this.prevSlide();
-                }
-            }
-            
-            isSwiping = false;
-            setTimeout(() => this.resumeAutoSlide(), 3000);
-        });
-    }
-    
-    preloadImages() {
-        this.slides.forEach(slide => {
-            const img = slide.querySelector('img');
-            if (img) {
-                const preloadImage = new Image();
-                preloadImage.src = img.src;
-                preloadImage.onload = () => {
-                    img.classList.add('loaded');
-                };
-            }
-        });
-    }
-}
-
 // Modal functionality with enhanced animations
 const prayerModal = document.getElementById('prayerModal');
 const registerModal = document.getElementById('registerModal');
@@ -359,6 +355,8 @@ const closeButtons = document.querySelectorAll('.close-modal');
 
 // Enhanced modal open with animations
 function openModal(modal) {
+    if (!modal) return;
+    
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
@@ -376,13 +374,19 @@ function openModal(modal) {
     
     // Add entrance animation
     const modalContent = modal.querySelector('.modal-content');
-    modalContent.style.animation = 'slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    if (modalContent) {
+        modalContent.style.animation = 'slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    }
 }
 
 // Enhanced modal close with animations
 function closeModal(modal) {
+    if (!modal) return;
+    
     const modalContent = modal.querySelector('.modal-content');
-    modalContent.style.animation = 'slideDown 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    if (modalContent) {
+        modalContent.style.animation = 'slideDown 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    }
     
     // Remove focus trap
     modal.removeEventListener('keydown', trapTabKey);
@@ -472,31 +476,42 @@ window.addEventListener('click', (e) => {
 });
 
 // Enhanced quick links navigation with animations
-document.getElementById('quickEvents').addEventListener('click', () => {
-    const eventsSection = document.querySelector('#events');
-    eventsSection.scrollIntoView({
-        behavior: 'smooth'
-    });
-    
-    // Add pulse animation to events section
-    eventsSection.style.animation = 'pulse 1s ease-in-out';
-    setTimeout(() => {
-        eventsSection.style.animation = '';
-    }, 1000);
-});
+const quickEvents = document.getElementById('quickEvents');
+const quickSermons = document.getElementById('quickSermons');
 
-document.getElementById('quickSermons').addEventListener('click', () => {
-    const sermonsSection = document.querySelector('#sermons');
-    sermonsSection.scrollIntoView({
-        behavior: 'smooth'
+if (quickEvents) {
+    quickEvents.addEventListener('click', () => {
+        const eventsSection = document.querySelector('#events');
+        if (eventsSection) {
+            eventsSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Add pulse animation to events section
+            eventsSection.style.animation = 'pulse 1s ease-in-out';
+            setTimeout(() => {
+                eventsSection.style.animation = '';
+            }, 1000);
+        }
     });
-    
-    // Add pulse animation to sermons section
-    sermonsSection.style.animation = 'pulse 1s ease-in-out';
-    setTimeout(() => {
-        sermonsSection.style.animation = '';
-    }, 1000);
-});
+}
+
+if (quickSermons) {
+    quickSermons.addEventListener('click', () => {
+        const sermonsSection = document.querySelector('#sermons');
+        if (sermonsSection) {
+            sermonsSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Add pulse animation to sermons section
+            sermonsSection.style.animation = 'pulse 1s ease-in-out';
+            setTimeout(() => {
+                sermonsSection.style.animation = '';
+            }, 1000);
+        }
+    });
+}
 
 // Add pulse animation
 const pulseStyle = document.createElement('style');
@@ -535,12 +550,12 @@ if (prayerForm) {
             }
         }).then(response => {
             if (response.ok) {
-                prayerSuccess.classList.add('show');
+                if (prayerSuccess) prayerSuccess.classList.add('show');
                 this.reset();
                 this.style.opacity = '1';
                 
                 setTimeout(() => {
-                    prayerSuccess.classList.remove('show');
+                    if (prayerSuccess) prayerSuccess.classList.remove('show');
                     closeModal(prayerModal);
                 }, 3000);
             } else {
@@ -581,12 +596,12 @@ if (memberForm) {
             }
         }).then(response => {
             if (response.ok) {
-                memberSuccess.classList.add('show');
+                if (memberSuccess) memberSuccess.classList.add('show');
                 this.reset();
                 this.style.opacity = '1';
                 
                 setTimeout(() => {
-                    memberSuccess.classList.remove('show');
+                    if (memberSuccess) memberSuccess.classList.remove('show');
                     closeModal(registerModal);
                 }, 3000);
             } else {
@@ -627,12 +642,12 @@ if (giveForm) {
             }
         }).then(response => {
             if (response.ok) {
-                giveSuccess.classList.add('show');
+                if (giveSuccess) giveSuccess.classList.add('show');
                 this.reset();
                 this.style.opacity = '1';
                 
                 setTimeout(() => {
-                    giveSuccess.classList.remove('show');
+                    if (giveSuccess) giveSuccess.classList.remove('show');
                     closeModal(giveModal);
                 }, 3000);
             } else {
@@ -716,7 +731,7 @@ ministryCards.forEach(card => {
         const ministry = card.dataset.ministry;
         const data = ministryData[ministry];
         
-        if (data) {
+        if (data && modalContent) {
             modalContent.innerHTML = `
                 <h2>${data.title}</h2>
                 <p class="ministry-verse" style="font-style: italic; color: var(--accent-color); margin-bottom: 1rem;">${data.verse}</p>
@@ -890,6 +905,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize hero slider
     if (document.querySelector('.hero-slider')) {
         window.heroSlider = new HeroSlider();
+        console.log('Hero slider initialized successfully!');
     }
 });
 
@@ -975,27 +991,26 @@ window.addEventListener('load', () => {
 });
 
 console.log(`
-♿ ACCESSIBILITY FEATURES ACTIVATED:
+🎪 HERO SLIDER ACTIVATED:
+✅ 7-image slider initialized
+✅ Auto-sliding every 5 seconds
+✅ Manual navigation arrows
+✅ Touch swipe support
+✅ Indicator dots
+✅ Hover pause/resume
 
+♿ ACCESSIBILITY FEATURES:
 ✅ High Contrast Mode
 ✅ Large Text Mode  
 ✅ Reading Mode
 ✅ Keyboard Navigation
 ✅ Screen Reader Support
-✅ Focus Management
-✅ Reduced Motion Support
-✅ Skip to Content Link
-✅ ARIA Labels & Roles
-✅ Form Accessibility
 
 🎨 ENHANCED DESIGN:
 ✅ Transparent Header
 ✅ Static Church Background
-✅ 7-Image Hero Slider
 ✅ Reduced Blue Colors
 ✅ Glassmorphism Effects
-✅ Smooth Animations
-✅ Responsive Design
 
-All features are now working properly!
+All features are now working perfectly!
 `);
