@@ -12,8 +12,8 @@
     --text-dark: #2c3e50;
     --text-light: #7f8c8d;
     --white: #ffffff;
-    --light-bg: rgba(248, 250, 252, 0.95);
-    --dark-bg: rgba(30, 58, 95, 0.9);
+    --light-bg: rgba(248, 250, 252, 0.85);
+    --dark-bg: rgba(30, 58, 95, 0.7);
     --medium-blue: #3a6ea5;
     --light-blue: rgba(232, 242, 252, 0.9);
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -23,7 +23,7 @@
     --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Main background with static church image - Strong Fix */
+/* Main background with static church image */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -34,61 +34,22 @@ body {
     min-height: 100vh;
 }
 
-/* Create a fixed background element */
-body::after {
-    content: '';
+/* Fixed background element that stays in place */
+#static-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        linear-gradient(rgba(30, 58, 95, 0.1), rgba(30, 58, 95, 0.1)),
-        url('media/closeup-shot-male-holding-bible-while-sitting-park-table.jpg') center/cover;
+    background: url('media/church-background.jpg') center/cover;
     z-index: -2;
     pointer-events: none;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(
-            135deg,
-            rgba(30, 58, 95, 0.1) 0%,
-            rgba(30, 58, 95, 0.05) 50%,
-            rgba(30, 58, 95, 0.1) 100%
-        );
-    z-index: -1;
-    pointer-events: none;
-}
-
-/* Make sure all content sections are above the background */
+/* Make sure content is above background */
 main {
     position: relative;
     z-index: 1;
-}
-
-/* Light sections with subtle transparency */
-.quick-links,
-.development-section,
-.giving-section,
-.contact-section {
-    background: rgba(248, 250, 252, 0.85) !important;
-    backdrop-filter: blur(5px);
-}
-
-/* Ensure dark sections are fully opaque */
-.about-section,
-.ministries-section,
-.events-section,
-.sermons-section {
-    background: var(--dark-bg) !important;
-    position: relative;
 }
 
 /* Enhanced Accessibility Features */
@@ -136,28 +97,12 @@ body.high-contrast {
     --white: #ffffff !important;
     --light-bg: #ffffff !important;
     --dark-bg: #000000 !important;
-    background: #ffffff !important;
-    color: #000000 !important;
 }
 
 body.high-contrast * {
     background-color: #ffffff !important;
     color: #000000 !important;
     border-color: #000000 !important;
-}
-
-body.high-contrast .navbar,
-body.high-contrast .hero,
-body.high-contrast .parallax-section,
-body.high-contrast .about-section,
-body.high-contrast .events-section,
-body.high-contrast .sermons-section {
-    background: #ffffff !important;
-    color: #000000 !important;
-}
-
-body.high-contrast .slide-overlay {
-    background: #ffffff !important;
 }
 
 /* Large Text Mode */
@@ -174,29 +119,6 @@ body.large-text p { font-size: 1.2rem; }
 body.reading-mode {
     --light-bg: #f8f9fa;
     --text-dark: #2c3e50;
-    background: #f8f9fa !important;
-}
-
-body.reading-mode .navbar,
-body.reading-mode .hero,
-body.reading-mode .parallax-section,
-body.reading-mode .about-section,
-body.reading-mode .events-section,
-body.reading-mode .sermons-section {
-    background: #f8f9fa !important;
-    color: var(--text-dark) !important;
-}
-
-body.reading-mode .hero-content,
-body.reading-mode .about-section *,
-body.reading-mode .events-section *,
-body.reading-mode .sermons-section * {
-    color: var(--text-dark) !important;
-    text-shadow: none !important;
-}
-
-body.reading-mode .slide-overlay {
-    background: rgba(248, 249, 250, 0.8) !important;
 }
 
 /* Transparent Navigation */
@@ -350,7 +272,7 @@ body.reading-mode .slide-overlay {
 
 /* Enhanced Prayer Banner */
 .prayer-banner {
-    background: var(--secondary-color);
+    background: rgba(45, 78, 120, 0.9);
     color: var(--white);
     padding: 0.5rem 0;
     text-align: center;
@@ -390,7 +312,7 @@ body.reading-mode .slide-overlay {
     transform: translateY(-1px);
 }
 
-/* Enhanced Hero Section */
+/* Enhanced Hero Section with 7-image Slider */
 .hero {
     height: 80vh;
     position: relative;
@@ -400,7 +322,8 @@ body.reading-mode .slide-overlay {
     color: var(--white);
     text-align: center;
     overflow: hidden;
-    background: var(--dark-bg);
+    background: rgba(30, 58, 95, 0.3);
+    backdrop-filter: blur(5px);
 }
 
 .hero-slider {
@@ -464,49 +387,8 @@ body.reading-mode .slide-overlay {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        135deg,
-        rgba(30, 58, 95, 0.85) 0%,
-        rgba(30, 58, 95, 0.7) 50%,
-        rgba(30, 58, 95, 0.85) 100%
-    );
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1;
-}
-
-/* Video Placeholder */
-.video-placeholder {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 2;
-    color: var(--white);
-}
-
-.video-placeholder i {
-    font-size: 4rem;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
-    display: block;
-    transition: var(--transition);
-}
-
-.video-placeholder:hover i {
-    transform: scale(1.2);
-    color: var(--white);
-}
-
-.video-placeholder h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-}
-
-.video-placeholder p {
-    font-size: 1rem;
-    opacity: 0.9;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 /* Slider Navigation */
@@ -879,10 +761,10 @@ body.reading-mode .slide-overlay {
     transition: var(--transition);
 }
 
-/* Enhanced About Us Section */
+/* Enhanced About Us Section - More Transparent */
 .about-section {
     padding: 5rem 0;
-    background: var(--dark-bg);
+    background: rgba(30, 58, 95, 0.7);
     color: var(--white);
     position: relative;
     backdrop-filter: blur(5px);
@@ -971,10 +853,10 @@ body.reading-mode .slide-overlay {
     transform: scale(1.1);
 }
 
-/* Enhanced Ministries Section */
+/* Enhanced Ministries Section - More Transparent */
 .ministries-section {
     padding: 5rem 0;
-    background: var(--dark-bg);
+    background: rgba(30, 58, 95, 0.7);
     backdrop-filter: blur(5px);
 }
 
@@ -986,7 +868,7 @@ body.reading-mode .slide-overlay {
 }
 
 .ministry-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
@@ -1057,7 +939,7 @@ body.reading-mode .slide-overlay {
 }
 
 .belt-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -1100,10 +982,10 @@ body.reading-mode .slide-overlay {
     color: var(--secondary-color);
 }
 
-/* Enhanced Events Section */
+/* Enhanced Events Section - More Transparent */
 .events-section {
     padding: 5rem 0;
-    background: var(--dark-bg);
+    background: rgba(30, 58, 95, 0.7);
     color: var(--white);
     position: relative;
     backdrop-filter: blur(5px);
@@ -1294,10 +1176,10 @@ body.reading-mode .slide-overlay {
     color: var(--text-dark);
 }
 
-/* Enhanced Sermons Section */
+/* Enhanced Sermons Section - More Transparent */
 .sermons-section {
     padding: 5rem 0;
-    background: var(--dark-bg);
+    background: rgba(30, 58, 95, 0.7);
     color: var(--white);
     position: relative;
     backdrop-filter: blur(5px);
@@ -1368,840 +1250,4 @@ body.reading-mode .slide-overlay {
 .sermon-description {
     padding: 0 1rem 1rem !important;
     color: var(--white) !important;
-    line-height: 1.6;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-}
-
-/* Enhanced Giving Section */
-.giving-section {
-    padding: 5rem 0;
-    background: var(--light-bg);
-    backdrop-filter: blur(5px);
-}
-
-.giving-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.giving-option {
-    background: var(--white);
-    border-radius: 15px;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    cursor: pointer;
-    border-top: 4px solid var(--primary-color);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-}
-
-.giving-option:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-hover);
-}
-
-.giving-option i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    transition: var(--transition);
-}
-
-.giving-option:hover i {
-    color: var(--accent-color);
-    transform: scale(1.2) rotate(5deg);
-}
-
-.giving-option h3 {
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-
-.giving-option p {
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    color: var(--text-light);
-}
-
-.giving-details {
-    text-align: left;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(0,0,0,0.1);
-}
-
-.giving-details h4 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.giving-details ul {
-    list-style: none;
-    padding: 0;
-}
-
-.giving-details li {
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    position: relative;
-    color: var(--text-dark);
-}
-
-.giving-details li::before {
-    content: '•';
-    color: var(--accent-color);
-    position: absolute;
-    left: 0;
-}
-
-/* Enhanced Contact Section */
-.contact-section {
-    padding: 5rem 0;
-    background: var(--light-bg);
-    backdrop-filter: blur(5px);
-}
-
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    transition: var(--transition);
-    padding: 1rem;
-    border-radius: 10px;
-}
-
-.contact-item:hover {
-    background: rgba(30, 58, 95, 0.05);
-    transform: translateX(5px);
-}
-
-.contact-item i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-top: 0.25rem;
-    transition: var(--transition);
-}
-
-.contact-item:hover i {
-    color: var(--accent-color);
-    transform: scale(1.2);
-}
-
-.contact-item h4 {
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
-    transition: var(--transition);
-}
-
-.contact-item:hover h4 {
-    color: var(--accent-color);
-}
-
-.contact-item p {
-    color: var(--text-dark);
-}
-
-.contact-links {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    border-top: 4px solid var(--primary-color);
-    transition: var(--transition);
-    backdrop-filter: blur(5px);
-}
-
-.contact-links:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-}
-
-.contact-links h3 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-}
-
-.contact-links .link-button {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background: var(--primary-color);
-    color: var(--white);
-    text-decoration: none;
-    border-radius: 50px;
-    transition: var(--transition);
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-links .link-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: var(--transition-slow);
-}
-
-.contact-links .link-button:hover::before {
-    left: 100%;
-}
-
-.contact-links .link-button:hover {
-    background: var(--secondary-color);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 6px 20px rgba(45, 78, 120, 0.3);
-}
-
-.map-container {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.map-container:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-5px);
-}
-
-/* Enhanced Footer */
-.footer {
-    background: var(--dark-bg);
-    color: var(--white);
-    padding: 3rem 0 1rem;
-    position: relative;
-    backdrop-filter: blur(10px);
-}
-
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h4 {
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.footer-section h4::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: var(--accent-color);
-}
-
-.footer-section p {
-    color: var(--white);
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-    transition: var(--transition);
-}
-
-.footer-section ul li:hover {
-    transform: translateX(5px);
-}
-
-.footer-section ul li a {
-    color: #e0e0e0;
-    text-decoration: none;
-    transition: var(--transition);
-    display: block;
-    padding: 0.25rem 0;
-}
-
-.footer-section ul li a:hover {
-    color: var(--accent-color);
-    transform: translateX(5px);
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.social-links a {
-    color: var(--white);
-    font-size: 1.5rem;
-    transition: var(--transition);
-    padding: 0.5rem;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-}
-
-.social-links a:hover {
-    color: var(--accent-color);
-    background: rgba(255,255,255,0.2);
-    transform: translateY(-3px) scale(1.1);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid var(--medium-blue);
-    color: #e0e0e0;
-}
-
-/* Enhanced Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(5px);
-    animation: fadeIn 0.3s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.modal-content {
-    background: var(--white);
-    margin: 5% auto;
-    padding: 2rem;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 600px;
-    position: relative;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.close-modal {
-    position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
-    font-size: 2rem;
-    cursor: pointer;
-    color: var(--text-light);
-    transition: var(--transition);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.1);
-}
-
-.close-modal:hover {
-    color: var(--primary-color);
-    background: rgba(0,0,0,0.2);
-    transform: rotate(90deg) scale(1.1);
-}
-
-/* Enhanced Form Styles */
-.form-group {
-    margin-bottom: 1.5rem;
-    position: relative;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    transition: var(--transition);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: var(--transition);
-    font-family: inherit;
-    background: var(--white);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
-    transform: translateY(-2px);
-}
-
-.form-group input:valid,
-.form-group select:valid,
-.form-group textarea:valid {
-    border-color: var(--success-color);
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 1rem;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
-}
-
-.submit-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: var(--transition-slow);
-}
-
-.submit-btn:hover::before {
-    left: 100%;
-}
-
-.submit-btn:hover {
-    background: var(--secondary-color);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(45, 78, 120, 0.3);
-}
-
-.submit-btn:active {
-    transform: translateY(-1px) scale(1.01);
-}
-
-.form-success {
-    background: #d4edda;
-    color: #155724;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-top: 1rem;
-    text-align: center;
-    display: none;
-    animation: bounceIn 0.6s ease-out;
-}
-
-@keyframes bounceIn {
-    0% { transform: scale(0.3); opacity: 0; }
-    50% { transform: scale(1.05); }
-    70% { transform: scale(0.9); }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.form-success.show {
-    display: block;
-}
-
-.submit-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none !important;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.checkbox-label:hover {
-    color: var(--text-dark);
-}
-
-.checkbox-label input[type="checkbox"] {
-    width: auto;
-    transform: scale(1.2);
-}
-
-/* Modal text improvements */
-.modal-content h2 {
-    color: var(--primary-color);
-    text-align: center;
-    margin-bottom: 1rem;
-    position: relative;
-}
-
-.modal-content h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: var(--accent-color);
-    border-radius: 2px;
-}
-
-.modal-content p {
-    color: var(--text-dark);
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-/* Back to Top Button */
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: var(--accent-color);
-    color: var(--dark-bg);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(230, 179, 37, 0.3);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-}
-
-.back-to-top.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.back-to-top:hover {
-    background: var(--white);
-    color: var(--dark-bg);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
-}
-
-/* Loading Animation */
-.loading-spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    border-top-color: var(--white);
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 10px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Screen reader only text */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Skip to main content link */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--accent-color);
-    color: var(--dark-bg);
-    padding: 8px;
-    text-decoration: none;
-    border-radius: 4px;
-    z-index: 10000;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.skip-link:focus {
-    top: 6px;
-}
-
-/* Focus styles for keyboard navigation */
-.keyboard-navigation *:focus {
-    outline: 3px solid var(--accent-color) !important;
-    outline-offset: 3px !important;
-}
-
-/* Enhanced Responsive Design */
-@media (max-width: 768px) {
-    .accessibility-bar {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        padding: 0.25rem 0;
-    }
-    
-    .accessibility-btn {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.5rem;
-    }
-    
-    .navbar {
-        top: 60px;
-    }
-    
-    .prayer-banner {
-        margin-top: 90px;
-    }
-    
-    .hamburger {
-        display: flex;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 100px;
-        flex-direction: column;
-        background: rgba(30, 58, 95, 0.95);
-        width: 100%;
-        text-align: center;
-        transition: var(--transition);
-        box-shadow: var(--shadow);
-        padding: 2rem 0;
-        backdrop-filter: blur(20px);
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .contact-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .event-card {
-        flex-direction: column;
-    }
-    
-    .event-date {
-        min-width: auto;
-        flex-direction: row;
-        gap: 1rem;
-        justify-content: center;
-    }
-    
-    .about-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .cta-button {
-        margin: 0.5rem 0;
-        width: 100%;
-    }
-    
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .hero .cta-button {
-        width: 100%;
-        max-width: 250px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .ministries-grid,
-    .belts-grid,
-    .projects-grid,
-    .sermons-grid,
-    .giving-options {
-        grid-template-columns: 1fr;
-    }
-    
-    .nav-container {
-        padding: 1rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .modal-content {
-        margin: 10% auto;
-        padding: 1.5rem;
-        width: 95%;
-    }
-}
-
-/* Enhanced Animation on scroll */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.fade-in-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.fade-in-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.fade-in-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.fade-in-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Ensure text shadows for better readability on all dark background sections */
-.hero-content,
-.about-section,
-.events-section,
-.sermons-section {
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-/* Custom cursor for interactive elements */
-.interactive {
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.interactive:hover {
-    transform: scale(1.02);
-}
-
-/* Focus styles for accessibility */
-*:focus {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+    line
