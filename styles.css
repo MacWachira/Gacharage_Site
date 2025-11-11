@@ -32,7 +32,7 @@ body {
     scroll-behavior: smooth;
     background: 
         linear-gradient(rgba(30, 58, 95, 0.1), rgba(30, 58, 95, 0.1)),
-        url('media/church-background.jpg') center/cover;
+        url('media/closeup-shot-male-holding-bible-while-sitting-park-table.jpg') center/cover;
     background-attachment: fixed; /* This makes it static while scrolling */
     position: relative;
     min-height: 100vh;
