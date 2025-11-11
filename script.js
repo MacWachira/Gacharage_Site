@@ -1,3 +1,12 @@
+// Create static background element
+function createStaticBackground() {
+    if (!document.getElementById('static-background')) {
+        const staticBg = document.createElement('div');
+        staticBg.id = 'static-background';
+        document.body.insertBefore(staticBg, document.body.firstChild);
+    }
+}
+
 // Enhanced Accessibility Features
 const highContrastToggle = document.getElementById('highContrastToggle');
 const largeTextToggle = document.getElementById('largeTextToggle');
@@ -45,7 +54,7 @@ function toggleLargeText() {
         'Large text mode disabled'
     );
     
-    showToast(isEnabled ? 'Large text mode enabled' : 'Large contrast mode disabled');
+    showToast(isEnabled ? 'Large text mode enabled' : 'Large text mode disabled');
 }
 
 function toggleReadMode() {
@@ -171,7 +180,7 @@ backToTop.addEventListener('click', () => {
     });
 });
 
-// Enhanced Hero Slider Functionality
+// Enhanced Hero Slider with 7 images
 class HeroSlider {
     constructor() {
         this.slides = document.querySelectorAll('.slide');
@@ -334,68 +343,6 @@ class HeroSlider {
             }
         });
     }
-}
-
-// Video placeholder functionality
-function initVideoPlaceholder() {
-    const videoSlide = document.querySelector('.slide[data-type="video"]');
-    if (videoSlide) {
-        const videoPlaceholder = videoSlide.querySelector('.video-placeholder');
-        
-        videoPlaceholder.addEventListener('click', () => {
-            // Replace placeholder with actual video
-            const videoHTML = `
-                <div class="video-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/your-video-id?autoplay=1" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            `;
-            
-            videoSlide.querySelector('.slide-content').innerHTML = videoHTML + '<div class="slide-overlay"></div>';
-            
-            // Add video styles
-            const style = document.createElement('style');
-            style.textContent = `
-                .video-container {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 2;
-                }
-                
-                .video-container iframe {
-                    width: 100%;
-                    height: 100%;
-                }
-            `;
-            document.head.appendChild(style);
-        });
-    }
-}
-
-// Keyboard navigation for slider
-function addKeyboardNavigation() {
-    document.addEventListener('keydown', (e) => {
-        const hero = document.querySelector('.hero');
-        const isHeroVisible = hero && hero.getBoundingClientRect().top < window.innerHeight && 
-                              hero.getBoundingClientRect().bottom > 0;
-        
-        if (isHeroVisible) {
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                heroSlider.prevSlide();
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                heroSlider.nextSlide();
-            }
-        }
-    });
 }
 
 // Modal functionality with enhanced animations
@@ -917,6 +864,9 @@ document.head.appendChild(keyboardStyles);
 
 // Load saved accessibility settings when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    // Create static background
+    createStaticBackground();
+    
     // Load accessibility settings
     if (localStorage.getItem('highContrast') === 'true') {
         document.body.classList.add('high-contrast');
@@ -940,8 +890,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize hero slider
     if (document.querySelector('.hero-slider')) {
         window.heroSlider = new HeroSlider();
-        initVideoPlaceholder();
-        addKeyboardNavigation();
     }
 });
 
@@ -1043,8 +991,11 @@ console.log(`
 🎨 ENHANCED DESIGN:
 ✅ Transparent Header
 ✅ Static Church Background
+✅ 7-Image Hero Slider
+✅ Reduced Blue Colors
+✅ Glassmorphism Effects
 ✅ Smooth Animations
 ✅ Responsive Design
 
-All features are now working properly for users with disabilities.
+All features are now working properly!
 `);
