@@ -23,19 +23,30 @@
     --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Main background with static church image */
+/* Main background with static church image - Strong Fix */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background: 
-        linear-gradient(rgba(30, 58, 95, 0.1), rgba(30, 58, 95, 0.1)),
-        url('media/closeup-shot-male-holding-bible-while-sitting-park-table.jpg') center/cover;
-    background-attachment: fixed; /* This makes it static while scrolling */
     position: relative;
     min-height: 100vh;
+}
+
+/* Create a fixed background element */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(30, 58, 95, 0.1), rgba(30, 58, 95, 0.1)),
+        url('media/church-background.jpg') center/cover;
+    z-index: -2;
+    pointer-events: none;
 }
 
 body::before {
@@ -56,38 +67,28 @@ body::before {
     pointer-events: none;
 }
 
-/* Ensure all sections have transparent backgrounds to show the static background */
+/* Make sure all content sections are above the background */
+main {
+    position: relative;
+    z-index: 1;
+}
+
+/* Light sections with subtle transparency */
 .quick-links,
 .development-section,
 .giving-section,
 .contact-section {
-    background: transparent !important;
-    position: relative;
-    z-index: 1;
+    background: rgba(248, 250, 252, 0.85) !important;
+    backdrop-filter: blur(5px);
 }
 
-/* Add subtle overlay to sections for better readability */
-.quick-links::before,
-.development-section::before,
-.giving-section::before,
-.contact-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(248, 250, 252, 0.85);
-    z-index: -1;
-}
-
-/* Dark sections should still have their backgrounds */
+/* Ensure dark sections are fully opaque */
 .about-section,
 .ministries-section,
 .events-section,
 .sermons-section {
+    background: var(--dark-bg) !important;
     position: relative;
-    z-index: 1;
 }
 
 /* Enhanced Accessibility Features */
