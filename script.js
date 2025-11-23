@@ -166,94 +166,6 @@ class HeroSlider {
     }
 }
 
-// Enhanced Accessibility Features
-const highContrastToggle = document.getElementById('highContrastToggle');
-const largeTextToggle = document.getElementById('largeTextToggle');
-const readModeToggle = document.getElementById('readModeToggle');
-const resetAccessibility = document.getElementById('resetAccessibility');
-
-// Check if elements exist before adding event listeners
-if (highContrastToggle) {
-    highContrastToggle.addEventListener('click', toggleHighContrast);
-}
-
-if (largeTextToggle) {
-    largeTextToggle.addEventListener('click', toggleLargeText);
-}
-
-if (readModeToggle) {
-    readModeToggle.addEventListener('click', toggleReadMode);
-}
-
-if (resetAccessibility) {
-    resetAccessibility.addEventListener('click', resetAccessibilitySettings);
-}
-
-function toggleHighContrast() {
-    document.body.classList.toggle('high-contrast');
-    const isEnabled = document.body.classList.contains('high-contrast');
-    localStorage.setItem('highContrast', isEnabled);
-    
-    // Announce change to screen readers
-    announceToScreenReader(isEnabled ? 
-        'High contrast mode enabled' : 
-        'High contrast mode disabled'
-    );
-    
-    showToast(isEnabled ? 'High contrast mode enabled' : 'High contrast mode disabled');
-}
-
-function toggleLargeText() {
-    document.body.classList.toggle('large-text');
-    const isEnabled = document.body.classList.contains('large-text');
-    localStorage.setItem('largeText', isEnabled);
-    
-    announceToScreenReader(isEnabled ? 
-        'Large text mode enabled' : 
-        'Large text mode disabled'
-    );
-    
-    showToast(isEnabled ? 'Large text mode enabled' : 'Large text mode disabled');
-}
-
-function toggleReadMode() {
-    document.body.classList.toggle('reading-mode');
-    const isEnabled = document.body.classList.contains('reading-mode');
-    localStorage.setItem('readingMode', isEnabled);
-    
-    announceToScreenReader(isEnabled ? 
-        'Reading mode enabled' : 
-        'Reading mode disabled'
-    );
-    
-    showToast(isEnabled ? 'Reading mode enabled' : 'Reading mode disabled');
-}
-
-function resetAccessibilitySettings() {
-    document.body.classList.remove('high-contrast', 'large-text', 'reading-mode');
-    localStorage.removeItem('highContrast');
-    localStorage.removeItem('largeText');
-    localStorage.removeItem('readingMode');
-    
-    announceToScreenReader('All accessibility settings reset');
-    showToast('All accessibility settings reset');
-}
-
-// Screen reader announcement function
-function announceToScreenReader(message) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.classList.add('sr-only');
-    announcement.textContent = message;
-    
-    document.body.appendChild(announcement);
-    
-    setTimeout(() => {
-        document.body.removeChild(announcement);
-    }, 1000);
-}
-
 // Enhanced Navigation with transparent header
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -877,21 +789,10 @@ keyboardStyles.textContent = `
 `;
 document.head.appendChild(keyboardStyles);
 
-// Load saved accessibility settings when DOM is ready
+// Load saved settings when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     // Create static background
     createStaticBackground();
-    
-    // Load accessibility settings
-    if (localStorage.getItem('highContrast') === 'true') {
-        document.body.classList.add('high-contrast');
-    }
-    if (localStorage.getItem('largeText') === 'true') {
-        document.body.classList.add('large-text');
-    }
-    if (localStorage.getItem('readingMode') === 'true') {
-        document.body.classList.add('reading-mode');
-    }
     
     // Add skip to main content link
     addSkipToContentLink();
@@ -999,18 +900,13 @@ console.log(`
 ✅ Indicator dots
 ✅ Hover pause/resume
 
-♿ ACCESSIBILITY FEATURES:
-✅ High Contrast Mode
-✅ Large Text Mode  
-✅ Reading Mode
-✅ Keyboard Navigation
-✅ Screen Reader Support
-
 🎨 ENHANCED DESIGN:
-✅ Transparent Header
-✅ Static Church Background
-✅ Reduced Blue Colors
-✅ Glassmorphism Effects
+✅ Static Background for Development, Giving & Contact Sections
+✅ Expanded Map Section
+✅ Reduced Footer Size
+✅ Readable Header Navigation
+✅ Mobile Responsive Design
+✅ Back to Top Button
 
 All features are now working perfectly!
 `);
