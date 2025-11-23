@@ -46,87 +46,35 @@ body {
     pointer-events: none;
 }
 
+/* Static background for specific sections */
+.static-bg-section {
+    position: relative;
+}
+
+.static-bg-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('media/closeup-shot-male-holding-bible-while-sitting-park-table.jpg') center/cover;
+    z-index: -1;
+    opacity: 0.1;
+}
+
 /* Make sure content is above background */
 main {
     position: relative;
     z-index: 1;
 }
 
-/* Enhanced Accessibility Features */
-.accessibility-bar {
-    background: rgba(45, 78, 120, 0.95);
-    color: var(--white);
-    padding: 0.5rem 0;
+/* Enhanced Navigation with better readability */
+.navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 3000;
-    display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-    font-size: 0.9rem;
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.accessibility-btn {
-    background: transparent;
-    border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.accessibility-btn:hover {
-    background: var(--accent-color);
-    color: var(--dark-bg);
-    transform: translateY(-2px);
-}
-
-/* High Contrast Mode */
-body.high-contrast {
-    --primary-color: #000000 !important;
-    --secondary-color: #000080 !important;
-    --accent-color: #ffff00 !important;
-    --text-dark: #000000 !important;
-    --text-light: #000000 !important;
-    --white: #ffffff !important;
-    --light-bg: #ffffff !important;
-    --dark-bg: #000000 !important;
-}
-
-body.high-contrast * {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border-color: #000000 !important;
-}
-
-/* Large Text Mode */
-body.large-text {
-    font-size: 120%;
-}
-
-body.large-text h1 { font-size: 2.8rem; }
-body.large-text h2 { font-size: 2.4rem; }
-body.large-text h3 { font-size: 2rem; }
-body.large-text p { font-size: 1.2rem; }
-
-/* Reading Mode */
-body.reading-mode {
-    --light-bg: #f8f9fa;
-    --text-dark: #2c3e50;
-}
-
-/* Transparent Navigation */
-.navbar {
-    position: fixed;
-    top: 40px;
-    width: 100%;
-    background: rgba(30, 58, 95, 0.1);
+    background: rgba(30, 58, 95, 0.95);
     box-shadow: none;
     z-index: 1000;
     transition: var(--transition-slow);
@@ -135,20 +83,20 @@ body.reading-mode {
 }
 
 .navbar.scrolled {
-    background: rgba(30, 58, 95, 0.85);
+    background: rgba(30, 58, 95, 0.98);
     backdrop-filter: blur(25px);
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .navbar.transparent {
-    background: rgba(30, 58, 95, 0.05);
+    background: rgba(30, 58, 95, 0.9);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar.transparent.scrolled {
-    background: rgba(30, 58, 95, 0.85);
+    background: rgba(30, 58, 95, 0.98);
     backdrop-filter: blur(25px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -185,6 +133,7 @@ body.reading-mode {
     color: var(--white);
     font-size: 1.2rem;
     transition: var(--transition);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .navbar.scrolled .church-name {
@@ -200,15 +149,18 @@ body.reading-mode {
 .nav-link {
     text-decoration: none;
     color: var(--white);
-    font-weight: 500;
+    font-weight: 600;
     transition: var(--transition);
     position: relative;
     padding: 0.5rem 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    font-size: 1rem;
 }
 
 .nav-link:hover {
     color: var(--accent-color);
     transform: translateY(-2px);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
 }
 
 .nav-link::after {
@@ -276,7 +228,7 @@ body.reading-mode {
     color: var(--white);
     padding: 0.5rem 0;
     text-align: center;
-    margin-top: 110px;
+    margin-top: 80px;
     font-weight: 500;
     position: relative;
     overflow: hidden;
@@ -1079,11 +1031,12 @@ body.reading-mode {
     color: var(--white);
 }
 
-/* Enhanced Development Section */
+/* Enhanced Development Section with Static Background */
 .development-section {
     padding: 5rem 0;
     background: var(--light-bg);
     backdrop-filter: blur(5px);
+    position: relative;
 }
 
 .projects-grid {
@@ -1254,11 +1207,12 @@ body.reading-mode {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
-/* Enhanced Giving Section */
+/* Enhanced Giving Section with Static Background */
 .giving-section {
     padding: 5rem 0;
     background: var(--light-bg);
     backdrop-filter: blur(5px);
+    position: relative;
 }
 
 .giving-options {
@@ -1341,11 +1295,12 @@ body.reading-mode {
     left: 0;
 }
 
-/* Enhanced Contact Section */
+/* Enhanced Contact Section with Static Background */
 .contact-section {
     padding: 5rem 0;
     background: var(--light-bg);
     backdrop-filter: blur(5px);
+    position: relative;
 }
 
 .contact-content {
@@ -1453,11 +1408,18 @@ body.reading-mode {
     box-shadow: 0 6px 20px rgba(45, 78, 120, 0.3);
 }
 
+/* Expanded Map Container */
 .map-container {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    height: 400px;
+}
+
+.map-container.expanded-map {
+    height: 500px;
+    width: 100%;
 }
 
 .map-container:hover {
@@ -1465,11 +1427,17 @@ body.reading-mode {
     transform: translateY(-5px);
 }
 
-/* Enhanced Footer */
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Enhanced Footer - Reduced Size */
 .footer {
     background: rgba(30, 58, 95, 0.9);
     color: var(--white);
-    padding: 3rem 0 1rem;
+    padding: 2rem 0 1rem;
     position: relative;
     backdrop-filter: blur(10px);
 }
@@ -1488,7 +1456,7 @@ body.reading-mode {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .footer-section h4 {
@@ -1496,6 +1464,7 @@ body.reading-mode {
     color: var(--accent-color);
     position: relative;
     padding-bottom: 0.5rem;
+    font-size: 1.1rem;
 }
 
 .footer-section h4::after {
@@ -1510,6 +1479,8 @@ body.reading-mode {
 
 .footer-section p {
     color: var(--white);
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 .footer-section ul {
@@ -1531,6 +1502,7 @@ body.reading-mode {
     transition: var(--transition);
     display: block;
     padding: 0.25rem 0;
+    font-size: 0.9rem;
 }
 
 .footer-section ul li a:hover {
@@ -1546,7 +1518,7 @@ body.reading-mode {
 
 .social-links a {
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     transition: var(--transition);
     padding: 0.5rem;
     border-radius: 50%;
@@ -1561,9 +1533,24 @@ body.reading-mode {
 
 .footer-bottom {
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--medium-blue);
     color: #e0e0e0;
+    font-size: 0.8rem;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.footer-bottom a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
 }
 
 /* Enhanced Modal */
@@ -1885,23 +1872,13 @@ body.reading-mode {
 
 /* Enhanced Responsive Design */
 @media (max-width: 768px) {
-    .accessibility-bar {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        padding: 0.25rem 0;
-    }
-    
-    .accessibility-btn {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.5rem;
-    }
-    
     .navbar {
-        top: 60px;
+        top: 0;
     }
     
     .prayer-banner {
-        margin-top: 90px;
+        margin-top: 70px;
+        font-size: 0.9rem;
     }
     
     .hamburger {
@@ -1911,9 +1888,9 @@ body.reading-mode {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 100px;
+        top: 70px;
         flex-direction: column;
-        background: rgba(30, 58, 95, 0.95);
+        background: rgba(30, 58, 95, 0.98);
         width: 100%;
         text-align: center;
         transition: var(--transition);
@@ -1926,12 +1903,19 @@ body.reading-mode {
         left: 0;
     }
     
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 1rem;
+        display: block;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    }
+    
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
     
     .contact-content {
@@ -1978,6 +1962,28 @@ body.reading-mode {
         width: 100%;
         max-width: 250px;
     }
+    
+    .map-container.expanded-map {
+        height: 300px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .footer-section h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1986,7 +1992,11 @@ body.reading-mode {
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
     }
     
     .ministries-grid,
@@ -2002,13 +2012,42 @@ body.reading-mode {
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .modal-content {
         margin: 10% auto;
         padding: 1.5rem;
         width: 95%;
+    }
+    
+    .map-container.expanded-map {
+        height: 250px;
+    }
+    
+    .footer {
+        padding: 1.5rem 0 0.5rem;
+    }
+    
+    .footer-content {
+        gap: 1rem;
+    }
+    
+    .footer-section h4 {
+        font-size: 1rem;
+    }
+    
+    .footer-section p,
+    .footer-section ul li a {
+        font-size: 0.8rem;
+    }
+    
+    .footer-bottom {
+        padding-top: 1rem;
+    }
+    
+    .footer-bottom p {
+        font-size: 0.7rem;
     }
 }
 
