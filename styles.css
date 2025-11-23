@@ -1031,7 +1031,7 @@ main {
 /* Enhanced Development Section - Reduced padding */
 .development-section {
     padding: 3rem 0;
-    background: var(--light-bg);
+    background: rgba(30, 58, 95, 0.7);
     backdrop-filter: blur(5px);
     position: relative;
 }
