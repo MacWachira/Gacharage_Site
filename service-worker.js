@@ -11,8 +11,8 @@ const urlsToCache = [
   '/media/hero4.jpg',
   '/media/hero5.jpg',
   '/media/church_1.jpg',
-  '/media/church.jpg'
-  // Add more media files as needed
+  '/media/church.jpg',
+  '/media/Dark-hallway.jpg'
 ];
 
 self.addEventListener('install', event => {
