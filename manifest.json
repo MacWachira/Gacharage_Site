@@ -1,0 +1,21 @@
+{
+  "name": "A.C.K St Peter's Gacharage Church",
+  "short_name": "Gacharage Church",
+  "description": "Growing in Faith, Serving in Love",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e3a5f",
+  "theme_color": "#1e3a5f",
+  "icons": [
+    {
+      "src": "media/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "media/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
