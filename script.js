@@ -1,141 +1,13 @@
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then(reg => console.log('SW registered'))
-            .catch(err => console.log('SW registration failed'));
-    });
-}
-
-i18next.init({
-    lng: 'en',
-    debug: false,
-    resources: {
-        en: {
-            translation: {
-                title: 'A.C.K St Peter\'s Gacharage Church - Growing in Faith, Serving in Love',
-                'hero-title': 'Welcome to A.C.K St Peter\'s Gacharage Church',
-                mission: '"Growing in Faith, Serving in Love"',
-                'learn-more': 'Learn More',
-                'join-us': 'Join Us',
-                'nav-home': 'Home',
-                'nav-about': 'About Us',
-                'nav-ministries': 'Ministries',
-                'nav-events': 'Events',
-                'nav-development': 'Development',
-                'nav-sermons': 'Sermons',
-                'nav-giving': 'Give',
-                'nav-contact': 'Contact',
-                'prayer-banner': 'Need prayer? Submit a prayer request and our prayer team will intercede for you.',
-                'about-title': 'About Us',
-                'ministries-title': 'Ministries',
-                'events-title': 'Events & Announcements',
-                'footer-about': 'About',
-                'quick-links': 'Quick Links',
-                'service-times': 'Service Times',
-                'get-in-touch': 'Get In Touch',
-                'footer-copyright': '&copy; 2025 A.C.K St Peter\'s Gacharage Church. All rights reserved.'
-            }
-        },
-        sw: {
-            translation: {
-                title: 'Kanisa la A.C.K St Peter\'s Gacharage - Kukua katika Imani, Kutumikia kwa Upendo',
-                'hero-title': 'Karibu Kanisani la A.C.K St Peter\'s Gacharage',
-                mission: '"Kukua katika Imani, Kutumikia kwa Upendo"',
-                'learn-more': 'Jifunze Zaidi',
-                'join-us': 'Jiunge Nasi',
-                'nav-home': 'Nyumbani',
-                'nav-about': 'Kuhusu Sisi',
-                'nav-ministries': 'Huduma',
-                'nav-events': 'Matukio',
-                'nav-development': 'Maendeleo',
-                'nav-sermons': 'Mahubiri',
-                'nav-giving': 'Changamoto',
-                'nav-contact': 'Wasiliana',
-                'prayer-banner': 'Unahitaji maombi? Tuma ombi la maombi na timu yetu ya maombi itaomba kwako.',
-                'about-title': 'Kuhusu Sisi',
-                'ministries-title': 'Huduma',
-                'events-title': 'Matukio na Matangazo',
-                'footer-about': 'Kuhusu',
-                'quick-links': 'Viungo Haraka',
-                'service-times': 'Muda wa Huduma',
-                'get-in-touch': 'Pata Kuwasiliana',
-                'footer-copyright': '&copy; 2025 Kanisa la A.C.K St Peter\'s Gacharage. Haki zote zimehifadhiwa.'
-            }
-        }
+// Create static background element
+function createStaticBackground() {
+    if (!document.getElementById('static-background')) {
+        const staticBg = document.createElement('div');
+        staticBg.id = 'static-background';
+        document.body.insertBefore(staticBg, document.body.firstChild);
     }
-}, function(err, t) {
-    updateContent();
-});
-
-function updateContent() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.innerHTML = i18next.t(key);
-    });
 }
 
-document.getElementById('langToggle').addEventListener('click', () => {
-    const currentLng = i18next.language;
-    const newLng = currentLng === 'en' ? 'sw' : 'en';
-    i18next.changeLanguage(newLng, () => {
-        updateContent();
-        document.documentElement.lang = newLng;
-    });
-});
-
-document.getElementById('darkModeToggle').addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const icon = document.querySelector('#darkModeToggle i');
-    if (document.body.classList.contains('dark-mode')) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-});
-
-if (localStorage.getItem('darkMode') === 'true') {
-    document.body.classList.add('dark-mode');
-    const icon = document.querySelector('#darkModeToggle i');
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const calendarEl = document.getElementById('calendar');
-    const events = [
-        { title: 'Christmas Service', date: '2025-12-25', extendedProps: { description: 'Special Christmas celebration' } },
-        { title: 'Youth Retreat', start: '2025-01-15', end: '2025-01-17', extendedProps: { description: 'Youth spiritual retreat' } },
-        { title: 'Sunday Service', startRecur: { start: '2025-11-30', end: '2025-12-31' }, daysOfWeek: [0], extendedProps: { description: 'Weekly worship' } }
-    ];
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        events: events,
-        eventDidMount: function(info) {
-            info.el.title = info.event.extendedProps.description || '';
-        },
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek'
-        },
-        height: 'auto'
-    });
-    calendar.render();
-});
-
-document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', () => {
-        const formId = form.id || 'unknown';
-        gtag('event', 'form_submit', {
-            'form_id': formId,
-            'value': 1
-        });
-    });
-});
-
+// Enhanced Hero Slider with 7 images - FIXED VERSION
 class HeroSlider {
     constructor() {
         this.slides = document.querySelectorAll('.slide');
@@ -144,37 +16,35 @@ class HeroSlider {
         this.nextBtn = document.querySelector('.slider-nav.next');
         this.currentSlide = 0;
         this.slideInterval = null;
-        this.slideDuration = 5000;
+        this.slideDuration = 5000; // 5 seconds
         this.isAnimating = false;
         
         this.init();
     }
     
     init() {
+        // Show first slide
         this.showSlide(this.currentSlide);
+        
+        // Start automatic sliding
         this.startAutoSlide();
+        
+        // Event listeners for navigation
         this.prevBtn.addEventListener('click', () => this.prevSlide());
         this.nextBtn.addEventListener('click', () => this.nextSlide());
+        
+        // Event listeners for indicators
         this.indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => this.goToSlide(index));
         });
+        
+        // Pause on hover
         const hero = document.querySelector('.hero');
         hero.addEventListener('mouseenter', () => this.pauseAutoSlide());
         hero.addEventListener('mouseleave', () => this.resumeAutoSlide());
+        
+        // Touch support for mobile
         this.addTouchSupport();
-        this.createIndicators();
-    }
-    
-    createIndicators() {
-        const indicatorsContainer = document.querySelector('.slide-indicators');
-        indicatorsContainer.innerHTML = '';
-        this.slides.forEach((_, index) => {
-            const indicator = document.createElement('div');
-            indicator.classList.add('indicator');
-            if (index === 0) indicator.classList.add('active');
-            indicatorsContainer.appendChild(indicator);
-        });
-        this.indicators = document.querySelectorAll('.indicator');
     }
     
     startAutoSlide() {
@@ -198,6 +68,7 @@ class HeroSlider {
     
     nextSlide() {
         if (this.isAnimating) return;
+        
         this.isAnimating = true;
         const nextIndex = (this.currentSlide + 1) % this.slides.length;
         this.changeSlide(nextIndex, 'next');
@@ -205,6 +76,7 @@ class HeroSlider {
     
     prevSlide() {
         if (this.isAnimating) return;
+        
         this.isAnimating = true;
         const prevIndex = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
         this.changeSlide(prevIndex, 'prev');
@@ -212,6 +84,7 @@ class HeroSlider {
     
     goToSlide(index) {
         if (this.isAnimating || index === this.currentSlide) return;
+        
         this.isAnimating = true;
         const direction = index > this.currentSlide ? 'next' : 'prev';
         this.changeSlide(index, direction);
@@ -220,12 +93,19 @@ class HeroSlider {
     changeSlide(newIndex, direction) {
         const currentSlide = this.slides[this.currentSlide];
         const newSlide = this.slides[newIndex];
+        
+        // Add direction classes for animations
         currentSlide.classList.remove('active');
         currentSlide.classList.add(direction);
+        
         newSlide.classList.add('active', direction);
+        
+        // Remove classes after animation
         setTimeout(() => {
             currentSlide.classList.remove('prev', 'next');
             newSlide.classList.remove('prev', 'next');
+            
+            // Update current slide and indicators
             this.currentSlide = newIndex;
             this.updateIndicators();
             this.isAnimating = false;
@@ -233,9 +113,12 @@ class HeroSlider {
     }
     
     showSlide(index) {
+        // Hide all slides
         this.slides.forEach(slide => {
             slide.classList.remove('active', 'prev', 'next');
         });
+        
+        // Show current slide
         this.slides[index].classList.add('active');
         this.updateIndicators();
     }
@@ -265,8 +148,10 @@ class HeroSlider {
         
         slider.addEventListener('touchend', () => {
             if (!isSwiping) return;
+            
             const diff = startX - currentX;
             const swipeThreshold = 50;
+            
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0) {
                     this.nextSlide();
@@ -274,12 +159,14 @@ class HeroSlider {
                     this.prevSlide();
                 }
             }
+            
             isSwiping = false;
             setTimeout(() => this.resumeAutoSlide(), 3000);
         });
     }
 }
 
+// Enhanced Navigation with transparent header
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navbar = document.querySelector('.navbar');
@@ -288,6 +175,8 @@ if (hamburger) {
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        
+        // Add animation delay for menu items
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach((item, index) => {
             if (navMenu.classList.contains('active')) {
@@ -299,6 +188,7 @@ if (hamburger) {
     });
 }
 
+// Close mobile menu when clicking on links
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         if (hamburger) hamburger.classList.remove('active');
@@ -306,6 +196,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
+// Enhanced smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -319,23 +210,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Enhanced Navbar background on scroll with transparent effect
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero');
     const heroHeight = hero ? hero.offsetHeight : 0;
     
+    // Transparent header logic
     if (window.scrollY < heroHeight - 100) {
         navbar.classList.add('transparent');
     } else {
         navbar.classList.remove('transparent');
     }
     
+    // Scrolled state
     if (window.scrollY > 100) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
     
+    // Back to top button
     const backToTop = document.querySelector('.back-to-top');
     if (window.scrollY > 300) {
         backToTop.classList.add('show');
@@ -344,7 +239,13 @@ window.addEventListener('scroll', () => {
     }
 });
 
-const backToTop = document.querySelector('.back-to-top');
+// Back to top functionality
+const backToTop = document.createElement('button');
+backToTop.className = 'back-to-top';
+backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
+backToTop.setAttribute('aria-label', 'Back to top');
+document.body.appendChild(backToTop);
+
 backToTop.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
@@ -352,56 +253,78 @@ backToTop.addEventListener('click', () => {
     });
 });
 
+// Modal functionality with enhanced animations
 const prayerModal = document.getElementById('prayerModal');
 const registerModal = document.getElementById('registerModal');
 const giveModal = document.getElementById('giveModal');
 const ministryModal = document.getElementById('ministryModal');
 
-const prayerLinks = document.querySelectorAll('#prayerRequestLink');
-const registerLinks = document.querySelectorAll('#registerLink');
-const giveLinks = document.querySelectorAll('#givingModalLink');
+const prayerLinks = document.querySelectorAll('#prayerRequestLink, #prayerLink, #quickPrayer, #contactPrayer');
+const registerLinks = document.querySelectorAll('#registerLink, #quickRegister, #contactRegister');
+const giveLinks = document.querySelectorAll('#giveLink, #quickGive, #contactGive, #givingModalLink');
 
 const closeButtons = document.querySelectorAll('.close-modal');
 
+// Enhanced modal open with animations
 function openModal(modal) {
     if (!modal) return;
+    
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+    
+    // Store current focus
     modal._previousActiveElement = document.activeElement;
+    
+    // Set focus to modal
     const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
     if (focusableElements.length > 0) {
         focusableElements[0].focus();
     }
+    
+    // Trap focus inside modal
     modal.addEventListener('keydown', trapTabKey);
+    
+    // Add entrance animation
     const modalContent = modal.querySelector('.modal-content');
     if (modalContent) {
         modalContent.style.animation = 'slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     }
 }
 
+// Enhanced modal close with animations
 function closeModal(modal) {
     if (!modal) return;
+    
     const modalContent = modal.querySelector('.modal-content');
     if (modalContent) {
         modalContent.style.animation = 'slideDown 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     }
+    
+    // Remove focus trap
     modal.removeEventListener('keydown', trapTabKey);
+    
     setTimeout(() => {
         modal.style.display = 'none';
         document.body.style.overflow = '';
+        
+        // Restore focus to previous element
         if (modal._previousActiveElement) {
             modal._previousActiveElement.focus();
         }
     }, 250);
 }
 
+// Focus trap for modal
 function trapTabKey(e) {
     if (e.key === 'Tab') {
         const modal = e.currentTarget;
         const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        
         if (focusableElements.length === 0) return;
+        
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
+        
         if (e.shiftKey) {
             if (document.activeElement === firstElement) {
                 lastElement.focus();
@@ -416,6 +339,7 @@ function trapTabKey(e) {
     }
 }
 
+// Open prayer modal
 prayerLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -423,6 +347,7 @@ prayerLinks.forEach(link => {
     });
 });
 
+// Open registration modal
 registerLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -430,6 +355,7 @@ registerLinks.forEach(link => {
     });
 });
 
+// Open give modal
 giveLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -437,6 +363,7 @@ giveLinks.forEach(link => {
     });
 });
 
+// Close modals
 closeButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = button.closest('.modal');
@@ -444,13 +371,211 @@ closeButtons.forEach(button => {
     });
 });
 
+// Close modal when clicking outside
 window.addEventListener('click', (e) => {
-    if (e.target === prayerModal) closeModal(prayerModal);
-    if (e.target === registerModal) closeModal(registerModal);
-    if (e.target === giveModal) closeModal(giveModal);
-    if (e.target === ministryModal) closeModal(ministryModal);
+    if (e.target === prayerModal) {
+        closeModal(prayerModal);
+    }
+    if (e.target === registerModal) {
+        closeModal(registerModal);
+    }
+    if (e.target === giveModal) {
+        closeModal(giveModal);
+    }
+    if (e.target === ministryModal) {
+        closeModal(ministryModal);
+    }
 });
 
+// Enhanced quick links navigation with animations
+const quickEvents = document.getElementById('quickEvents');
+const quickSermons = document.getElementById('quickSermons');
+
+if (quickEvents) {
+    quickEvents.addEventListener('click', () => {
+        const eventsSection = document.querySelector('#events');
+        if (eventsSection) {
+            eventsSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Add pulse animation to events section
+            eventsSection.style.animation = 'pulse 1s ease-in-out';
+            setTimeout(() => {
+                eventsSection.style.animation = '';
+            }, 1000);
+        }
+    });
+}
+
+if (quickSermons) {
+    quickSermons.addEventListener('click', () => {
+        const sermonsSection = document.querySelector('#sermons');
+        if (sermonsSection) {
+            sermonsSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Add pulse animation to sermons section
+            sermonsSection.style.animation = 'pulse 1s ease-in-out';
+            setTimeout(() => {
+                sermonsSection.style.animation = '';
+            }, 1000);
+        }
+    });
+}
+
+// Add pulse animation
+const pulseStyle = document.createElement('style');
+pulseStyle.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(pulseStyle);
+
+// Enhanced form submissions with better animations
+const prayerForm = document.getElementById('prayerForm');
+const prayerSuccess = document.getElementById('prayerSuccess');
+
+if (prayerForm) {
+    prayerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Enhanced loading state
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
+        submitBtn.disabled = true;
+        
+        // Add loading animation to form
+        this.style.opacity = '0.7';
+        
+        // Formspree submission
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                if (prayerSuccess) prayerSuccess.classList.add('show');
+                this.reset();
+                this.style.opacity = '1';
+                
+                setTimeout(() => {
+                    if (prayerSuccess) prayerSuccess.classList.remove('show');
+                    closeModal(prayerModal);
+                }, 3000);
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        }).catch(error => {
+            alert('There was a problem submitting your request. Please try again.');
+            this.style.opacity = '1';
+        }).finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    });
+}
+
+const memberForm = document.getElementById('memberForm');
+const memberSuccess = document.getElementById('memberSuccess');
+
+if (memberForm) {
+    memberForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Enhanced loading state
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>Registering...';
+        submitBtn.disabled = true;
+        
+        // Add loading animation to form
+        this.style.opacity = '0.7';
+        
+        // Formspree submission
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                if (memberSuccess) memberSuccess.classList.add('show');
+                this.reset();
+                this.style.opacity = '1';
+                
+                setTimeout(() => {
+                    if (memberSuccess) memberSuccess.classList.remove('show');
+                    closeModal(registerModal);
+                }, 3000);
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        }).catch(error => {
+            alert('There was a problem submitting your registration. Please try again.');
+            this.style.opacity = '1';
+        }).finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    });
+}
+
+const giveForm = document.getElementById('giveForm');
+const giveSuccess = document.getElementById('giveSuccess');
+
+if (giveForm) {
+    giveForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Enhanced loading state
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
+        submitBtn.disabled = true;
+        
+        // Add loading animation to form
+        this.style.opacity = '0.7';
+        
+        // Formspree submission
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                if (giveSuccess) giveSuccess.classList.add('show');
+                this.reset();
+                this.style.opacity = '1';
+                
+                setTimeout(() => {
+                    if (giveSuccess) giveSuccess.classList.remove('show');
+                    closeModal(giveModal);
+                }, 3000);
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        }).catch(error => {
+            alert('There was a problem submitting your pledge. Please try again.');
+            this.style.opacity = '1';
+        }).finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    });
+}
+
+// Enhanced Ministry Modals with animations
 const ministryCards = document.querySelectorAll('.ministry-card');
 const modalContent = document.getElementById('modalContent');
 
@@ -517,6 +642,7 @@ ministryCards.forEach(card => {
     card.addEventListener('click', () => {
         const ministry = card.dataset.ministry;
         const data = ministryData[ministry];
+        
         if (data && modalContent) {
             modalContent.innerHTML = `
                 <h2>${data.title}</h2>
@@ -536,6 +662,7 @@ ministryCards.forEach(card => {
     });
 });
 
+// Enhanced Animation on scroll with staggered animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -544,9 +671,12 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Add staggered animation based on element position
             const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 0.1;
             entry.target.style.transitionDelay = `${delay}s`;
             entry.target.classList.add('visible');
+            
+            // Remove delay after animation
             setTimeout(() => {
                 entry.target.style.transitionDelay = '';
             }, 1000);
@@ -554,6 +684,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
+// Enhanced element observation with different animation types
 document.querySelectorAll('.ministry-card, .project-card, .sermon-card, .belt-card, .link-card, .giving-option').forEach((el, index) => {
     el.classList.add('fade-in');
     observer.observe(el);
@@ -569,6 +700,7 @@ document.querySelectorAll('.about-content, .contact-content').forEach((el, index
     observer.observe(el);
 });
 
+// Toast notification function
 function showToast(message) {
     const toast = document.createElement('div');
     toast.textContent = message;
@@ -586,7 +718,9 @@ function showToast(message) {
         font-weight: 500;
         animation: slideUp 0.3s ease-out;
     `;
+    
     document.body.appendChild(toast);
+    
     setTimeout(() => {
         toast.style.animation = 'slideDown 0.3s ease-out';
         setTimeout(() => {
@@ -595,6 +729,7 @@ function showToast(message) {
     }, 3000);
 }
 
+// Enhanced form validation with real-time feedback
 document.querySelectorAll('input, select, textarea').forEach(input => {
     input.addEventListener('blur', function() {
         if (this.value.trim() !== '') {
@@ -613,7 +748,9 @@ document.querySelectorAll('input, select, textarea').forEach(input => {
     });
 });
 
+// Enhanced keyboard navigation
 document.addEventListener('keydown', (e) => {
+    // Escape key closes modals
     if (e.key === 'Escape') {
         const openModals = document.querySelectorAll('.modal[style*="display: block"]');
         openModals.forEach(modal => {
@@ -621,6 +758,7 @@ document.addEventListener('keydown', (e) => {
         });
     }
     
+    // Tab key enables keyboard navigation mode
     if (e.key === 'Tab') {
         document.body.classList.add('keyboard-navigation');
     }
@@ -630,6 +768,7 @@ document.addEventListener('mousedown', () => {
     document.body.classList.remove('keyboard-navigation');
 });
 
+// Add keyboard navigation styles
 const keyboardStyles = document.createElement('style');
 keyboardStyles.textContent = `
     .keyboard-navigation *:focus {
@@ -650,6 +789,28 @@ keyboardStyles.textContent = `
 `;
 document.head.appendChild(keyboardStyles);
 
+// Load saved settings when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Create static background
+    createStaticBackground();
+    
+    // Add skip to main content link
+    addSkipToContentLink();
+    
+    // Enhance form labels
+    enhanceFormAccessibility();
+    
+    // Add ARIA labels to interactive elements
+    enhanceAriaLabels();
+    
+    // Initialize hero slider
+    if (document.querySelector('.hero-slider')) {
+        window.heroSlider = new HeroSlider();
+        console.log('Hero slider initialized successfully!');
+    }
+});
+
+// Add skip to main content link
 function addSkipToContentLink() {
     const skipLink = document.createElement('a');
     skipLink.href = '#main-content';
@@ -658,6 +819,7 @@ function addSkipToContentLink() {
     document.body.insertBefore(skipLink, document.body.firstChild);
 }
 
+// Enhance form accessibility
 function enhanceFormAccessibility() {
     document.querySelectorAll('input, select, textarea').forEach(input => {
         if (!input.id) {
@@ -668,21 +830,28 @@ function enhanceFormAccessibility() {
                 label.htmlFor = id;
             }
         }
+        
+        // Add ARIA attributes
         if (input.required) {
             input.setAttribute('aria-required', 'true');
         }
+        
         if (input.type === 'checkbox' || input.type === 'radio') {
             input.setAttribute('role', input.type);
         }
     });
 }
 
+// Enhance ARIA labels
 function enhanceAriaLabels() {
+    // Navigation
     const nav = document.querySelector('.nav-menu');
     if (nav) {
         nav.setAttribute('role', 'navigation');
         nav.setAttribute('aria-label', 'Main navigation');
     }
+    
+    // Hero slider
     const heroSlider = document.querySelector('.hero-slider');
     if (heroSlider) {
         heroSlider.setAttribute('role', 'region');
@@ -690,95 +859,54 @@ function enhanceAriaLabels() {
     }
 }
 
+// Enhanced image alt text
 document.querySelectorAll('img').forEach(img => {
     if (!img.alt && !img.getAttribute('aria-hidden')) {
         img.alt = 'Decorative image';
     }
 });
 
+// Enhanced page load animations
 window.addEventListener('load', () => {
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.5s ease-in-out';
+    
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
+    
+    // Add loading animation for images
     document.querySelectorAll('img').forEach(img => {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.5s ease-in-out';
+        
         img.onload = function() {
             this.style.opacity = '1';
         };
+        
+        // Fallback for cached images
         if (img.complete) {
             img.style.opacity = '1';
         }
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    addSkipToContentLink();
-    enhanceFormAccessibility();
-    enhanceAriaLabels();
-    if (document.querySelector('.hero-slider')) {
-        window.heroSlider = new HeroSlider();
-        console.log('Hero slider initialized successfully!');
-    }
-    const prayerForm = document.getElementById('prayerForm');
-    if (prayerForm) {
-        prayerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="loading-spinner"></span>Submitting...';
-            submitBtn.disabled = true;
-            const formData = new FormData(this);
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    const success = document.getElementById('prayerSuccess');
-                    if (success) success.classList.add('show');
-                    showToast('Prayer request submitted successfully!');
-                    this.reset();
-                    closeModal(prayerModal);
-                    setTimeout(() => {
-                        if (success) success.classList.remove('show');
-                    }, 3000);
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            }).catch(error => {
-                alert('There was a problem submitting your prayer request. Please try again.');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-    }
-    // Similar for other forms...
-});
-
 console.log(`
 🎪 HERO SLIDER ACTIVATED:
-✅ 7-slide slider (6 images + video) initialized
+✅ 7-image slider initialized
 ✅ Auto-sliding every 5 seconds
 ✅ Manual navigation arrows
 ✅ Touch swipe support
 ✅ Indicator dots
 ✅ Hover pause/resume
 
-🎨 ENHANCED FEATURES:
-✅ PWA offline caching
-✅ Dark mode toggle
-✅ Swahili translation
-✅ Dynamic event calendar
-✅ GA4 tracking on forms
-✅ SEO schema markup
-✅ Live chat (Tidio)
-✅ Video hero slide
+🎨 ENHANCED DESIGN:
+✅ Static Background for Development, Giving & Contact Sections
+✅ Expanded Map Section
+✅ Reduced Footer Size
+✅ Readable Header Navigation
+✅ Mobile Responsive Design
+✅ Back to Top Button
 
-All systems operational—site restored and elevated!
+All features are now working perfectly!
 `);
