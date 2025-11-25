@@ -39,162 +39,186 @@
     <meta name="theme-color" content="#1e3a5f">
 </head>
 <body>
+    <!-- Skip to main content link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <main id="main-content">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <img src="media/logo.jpg" alt="Gacharage Church" class="logo">
-                    <span class="church-name">A.C.K ST PETER'S GACHARAGE CHURCH</span>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link" data-i18n="nav-about">About Us</a></li>
-                    <li class="nav-item"><a href="#ministries" class="nav-link" data-i18n="nav-ministries">Ministries</a></li>
-                    <li class="nav-item"><a href="#events" class="nav-link" data-i18n="nav-events">Events</a></li>
-                    <li class="nav-item"><a href="#development" class="nav-link" data-i18n="nav-development">Development</a></li>
-                    <li class="nav-item"><a href="#sermons" class="nav-link" data-i18n="nav-sermons">Sermons</a></li>
-                    <li class="nav-item"><a href="#giving" class="nav-link" data-i18n="nav-giving">Give</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
-                </ul>
-                <button id="darkModeToggle" class="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
-                <button id="langToggle" class="lang-toggle" aria-label="Toggle language"><i class="fas fa-globe"></i></button>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="media/logo.jpg" alt="Gacharage Church" class="logo">
+                <span class="church-name">A.C.K ST PETER'S GACHARAGE CHURCH</span>
             </div>
-        </nav>
-        <div class="prayer-banner">
-            <p data-i18n="prayer-banner">Need prayer? <a href="#" id="prayerRequestLink">Submit a prayer request</a> and our prayer team will intercede for you.</p>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link" data-i18n="nav-home">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link" data-i18n="nav-about">About Us</a></li>
+                <li class="nav-item"><a href="#ministries" class="nav-link" data-i18n="nav-ministries">Ministries</a></li>
+                <li class="nav-item"><a href="#events" class="nav-link" data-i18n="nav-events">Events</a></li>
+                <li class="nav-item"><a href="#development" class="nav-link" data-i18n="nav-development">Development</a></li>
+                <li class="nav-item"><a href="#sermons" class="nav-link" data-i18n="nav-sermons">Sermons</a></li>
+                <li class="nav-item"><a href="#giving" class="nav-link" data-i18n="nav-giving">Give</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link" data-i18n="nav-contact">Contact</a></li>
+            </ul>
+            <!-- Dark Mode Toggle -->
+            <button id="darkModeToggle" class="dark-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+            <!-- Language Toggle -->
+            <button id="langToggle" class="lang-toggle" aria-label="Toggle language"><i class="fas fa-globe"></i></button>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
-        <section id="home" class="hero">
-            <div class="hero-slider">
-                <div class="slide active" data-type="image">
-                    <div class="slide-content">
-                        <img src="media/preview.jpg" alt="Gacharage Church Worship Service" class="slide-image">
-                        <div class="slide-overlay"></div>
-                    </div>
-                </div>
-                <div class="slide" data-type="image">
-                    <div class="slide-content">
-                        <img src="media/hero1.jpg" alt="Church Community Fellowship" class="slide-image">
-                        <div class="slide-overlay"></div>
-                    </div>
-                </div>
-                <div class="slide" data-type="image">
-                    <div class="slide-content">
-                        <img src="media/hero3.jpg" alt="Sunday Service Celebration" class="slide-image">
-                        <div class="slide-overlay"></div>
-                    </div>
-                </div>
-                <div class="slide" data-type="image">
-                    <div class="slide-content">
-                        <img src="media/hero4.jpg" alt="Youth Ministry Activities" class="slide-image">
-                        <div class="slide-overlay"></div>
-                    </div>
-                </div>
-                <div class="slide" data-type="image">
-                    <div class="slide-content">
-                        <img src="media/hero5.jpg" alt="Church Building and Grounds" class="slide-image">
-                        <div class="slide-overlay"></div>
-                    </div>
-                </div>
-                <div class="slide" data-type="image">
-                    <div class="slide-content">
-                        <img src="media/church_1.jpg" alt="Church Interior Worship" class="slide-image">
-                        <div class="slide-overlay"></div>
-                    </div>
-                </div>
-                <div class="slide" data-type="video">
-                    <div class="slide-content">
-                        <video src="media/worship-video.mp4" autoplay muted loop playsinline class="slide-image"></video>
-                        <div class="slide-overlay"></div>
-                    </div>
-                </div>
-                <button class="slider-nav prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-nav next"><i class="fas fa-chevron-right"></i></button>
-                <div class="slide-indicators"></div>
-            </div>
-            <div class="hero-content">
-                <h1 class="hero-title" data-i18n="hero-title">Welcome to A.C.K St Peter's Gacharage Church</h1>
-                <p class="hero-subtitle" data-i18n="mission">"Growing in Faith, Serving in Love"</p>
-                <div class="hero-buttons">
-                    <a href="#about" class="cta-button" data-i18n="learn-more">Learn More</a>
-                    <a href="#ministries" class="cta-button secondary" data-i18n="join-us">Join Us</a>
+    </nav>
+
+    <!-- Prayer Request Banner -->
+    <div class="prayer-banner">
+        <p data-i18n="prayer-banner">Need prayer? <a href="#" id="prayerRequestLink">Submit a prayer request</a> and our prayer team will intercede for you.</p>
+    </div>
+
+    <!-- Enhanced Hero Section with 7-image Slider + Video -->
+    <section id="home" class="hero">
+        <div class="hero-slider">
+            <div class="slide active" data-type="image">
+                <div class="slide-content">
+                    <img src="media/preview.jpg" alt="Gacharage Church Worship Service" class="slide-image">
+                    <div class="slide-overlay"></div>
                 </div>
             </div>
-        </section>
+            <div class="slide" data-type="image">
+                <div class="slide-content">
+                    <img src="media/hero1.jpg" alt="Church Community Fellowship" class="slide-image">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            <div class="slide" data-type="image">
+                <div class="slide-content">
+                    <img src="media/hero3.jpg" alt="Sunday Service Celebration" class="slide-image">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            <div class="slide" data-type="image">
+                <div class="slide-content">
+                    <img src="media/hero4.jpg" alt="Youth Ministry Activities" class="slide-image">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            <div class="slide" data-type="image">
+                <div class="slide-content">
+                    <img src="media/hero5.jpg" alt="Church Building and Grounds" class="slide-image">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            <div class="slide" data-type="image">
+                <div class="slide-content">
+                    <img src="media/church_1.jpg" alt="Church Interior Worship" class="slide-image">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            <div class="slide" data-type="video">
+                <div class="slide-content">
+                    <video src="media/worship-video.mp4" autoplay muted loop playsinline class="slide-image"></video>
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            <button class="slider-nav prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-nav next"><i class="fas fa-chevron-right"></i></button>
+            <div class="slide-indicators">
+                <!-- Indicators generated by JS -->
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-i18n="hero-title">Welcome to A.C.K St Peter's Gacharage Church</h1>
+            <p class="hero-subtitle" data-i18n="mission">"Growing in Faith, Serving in Love"</p>
+            <div class="hero-buttons">
+                <a href="#about" class="cta-button" data-i18n="learn-more">Learn More</a>
+                <a href="#ministries" class="cta-button secondary" data-i18n="join-us">Join Us</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content">
+        <!-- About Us -->
         <section id="about" class="about-section container fade-in-right">
             <h2 class="section-title" data-i18n="about-title">About Us</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <h3 data-i18n="history">Church History</h3>
+                    <h3>Church history and mission since 1985</h3>
                     <p>Founded in 1985, A.C.K St Peter's Gacharage Church has been a beacon of faith in Ruaka, Kiambu County. From humble beginnings with 20 members, we've grown to serve over 500 families through worship, fellowship, and community service.</p>
                     <p>Our journey reflects God's faithfulness, marked by milestones like the construction of our first sanctuary in 1992 and the launch of youth ministries in 2005.</p>
                 </div>
                 <div class="about-image">
-                    <img src="media/church.jpg" alt="Church Building Exterior" loading="lazy">
+                    <img src="media/church.jpg" alt="Church Building" loading="lazy">
                 </div>
             </div>
             <div class="leadership-grid">
                 <div class="leader-card">
-                    <img src="media/pastor.jpg" alt="Rev. John Doe" loading="lazy">
+                    <img src="media/closeup-shot-male-holding-bible-while-sitting-park-table.jpg" alt="Rev. John Doe" loading="lazy">
                     <h4>Rev. John Doe</h4>
                     <p>Senior Pastor</p>
                 </div>
                 <div class="leader-card">
-                    <img src="media/associate-pastor.jpg" alt="Rev. Jane Smith" loading="lazy">
+                    <img src="media/pastor-placeholder.jpg" alt="Rev. Jane Smith" loading="lazy">
                     <h4>Rev. Jane Smith</h4>
                     <p>Associate Pastor</p>
                 </div>
             </div>
         </section>
+
+        <!-- Ministries -->
         <section id="ministries" class="ministries-section container">
             <h2 class="section-title" data-i18n="ministries-title">Ministries</h2>
             <div class="ministries-grid">
                 <div class="ministry-card" data-ministry="youth">
                     <i class="fas fa-users"></i>
                     <h3>Youth Ministry</h3>
-                    <p>Ages 18-35: Spiritual growth and leadership.</p>
+                    <p>For ages 18-35</p>
                 </div>
                 <div class="ministry-card" data-ministry="choir">
                     <i class="fas fa-music"></i>
                     <h3>Choir Ministry</h3>
-                    <p>Leading worship through music.</p>
+                    <p>Music and worship</p>
                 </div>
                 <div class="ministry-card" data-ministry="teens">
                     <i class="fas fa-child"></i>
                     <h3>Teens Ministry</h3>
-                    <p>Guidance for 13-17 years.</p>
+                    <p>Guidance for 13-17 years</p>
                 </div>
                 <div class="ministry-card" data-ministry="sunday-school">
                     <i class="fas fa-book-open"></i>
                     <h3>Sunday School</h3>
-                    <p>Children's Bible education.</p>
+                    <p>Children's education</p>
                 </div>
                 <div class="ministry-card" data-ministry="kama">
                     <i class="fas fa-handshake"></i>
                     <h3>KAMA</h3>
-                    <p>Kenya Anglican Men Association.</p>
+                    <p>Kenya Anglican Men Association</p>
                 </div>
                 <div class="ministry-card" data-ministry="mothers-union">
                     <i class="fas fa-heart"></i>
                     <h3>Mothers Union</h3>
-                    <p>Family support and prayer.</p>
+                    <p>Family support</p>
                 </div>
                 <div class="ministry-card" data-ministry="ladies-zion">
                     <i class="fas fa-prayer-rug"></i>
                     <h3>Ladies of Zion</h3>
-                    <p>Prayer and service for women.</p>
+                    <p>Prayer and service</p>
+                </div>
+                <div class="ministry-card" data-ministry="graced-voices">
+                    <i class="fas fa-microphone-alt"></i>
+                    <h3>Graced Voices</h3>
+                    <p>Worship team</p>
                 </div>
             </div>
         </section>
+
+        <!-- Events & Announcements (Dynamic Calendar) -->
         <section id="events" class="events-section container">
             <h2 class="section-title" data-i18n="events-title">Events & Announcements</h2>
             <div id="calendar" class="calendar-container"></div>
         </section>
+
+        <!-- Development Projects -->
         <section id="development" class="development-section container">
             <h2 class="section-title">Development Projects</h2>
             <div class="projects-grid">
@@ -221,23 +245,27 @@
                 </div>
             </div>
         </section>
+
+        <!-- Sermons -->
         <section id="sermons" class="sermons-section container">
-            <h2 class="section-title">Sermons</h2>
+            <h2 class="section-title" data-i18n="sermons-title">Sermons</h2>
             <div class="sermons-grid">
                 <div class="sermon-card">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Recent Sermon" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3>Recent Sermon</h3>
-                    <p>Date: November 17, 2025</p>
+                    <p>November 25, 2025</p>
                 </div>
                 <div class="sermon-card">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Faith in Action" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <h3>Faith in Action</h3>
-                    <p>Date: November 10, 2025</p>
+                    <p>November 18, 2025</p>
                 </div>
             </div>
         </section>
+
+        <!-- Giving & Support -->
         <section id="giving" class="giving-section container">
-            <h2 class="section-title">Giving & Support</h2>
+            <h2 class="section-title" data-i18n="giving-title">Giving & Support</h2>
             <div class="giving-options">
                 <div class="giving-option">
                     <h3>M-Pesa</h3>
@@ -256,8 +284,10 @@
             </div>
             <a href="#" id="givingModalLink" class="cta-button">Make a Pledge</a>
         </section>
+
+        <!-- Contact Information -->
         <section id="contact" class="contact-section container">
-            <h2 class="section-title">Contact Information</h2>
+            <h2 class="section-title" data-i18n="contact-title">Contact Information</h2>
             <div class="contact-content">
                 <div class="contact-info">
                     <h3>Church Address</h3>
@@ -267,18 +297,21 @@
                     <h3>Service Times</h3>
                     <p>Sunday: 8:00 AM & 10:30 AM</p>
                     <p>Wednesday Prayer: 5:30 PM</p>
+                    <p>Friday Fellowship: 6:00 PM</p>
                 </div>
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.76!2d36.65!3d-1.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTInMDAuMCJTIDM2wrA0MCcwMDAuMCJF!5e0!3m2!1sen!2ske!4v1234567890" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.76!2d36.65!3d-1.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTInMDAuMCJTIDM2wrA0MCcwMDAuMCJF!5e0!3m2!1sen!2ske!4v1234567890" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </section>
+
+        <!-- Footer -->
         <footer class="footer">
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-section">
                         <h4 data-i18n="footer-about">About</h4>
-                        <p>Growing in Faith, Serving in Love since 1985.</p>
+                        <p data-i18n="mission">"Growing in Faith, Serving in Love" since 1985.</p>
                         <div class="social-links">
                             <a href="#"><i class="fab fa-facebook"></i></a>
                             <a href="#"><i class="fab fa-youtube"></i></a>
@@ -286,6 +319,7 @@
                             <a href="#"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
+                    
                     <div class="footer-section">
                         <h4 data-i18n="quick-links">Quick Links</h4>
                         <ul>
@@ -296,24 +330,29 @@
                             <li><a href="#giving">Give</a></li>
                         </ul>
                     </div>
+                    
                     <div class="footer-section">
                         <h4 data-i18n="service-times">Service Times</h4>
                         <p>Sunday: 8:00 AM & 10:30 AM<br>
                            Wednesday Prayer: 5:30 PM<br>
                            Friday Fellowship: 6:00 PM</p>
                     </div>
+
                     <div class="footer-section">
                         <h4 data-i18n="get-in-touch">Get In Touch</h4>
                         <p>Have questions or need prayer? Reach out to us today.</p>
-                        <a href="#" class="link-button">Contact Us</a>
+                        <a href="#" class="link-button" id="contactPrayer">Contact Us</a>
                     </div>
                 </div>
+                
                 <div class="footer-bottom">
                     <p data-i18n="footer-copyright">&copy; 2025 A.C.K St Peter's Gacharage Church. All rights reserved. | Designed by <a href="https://maclyne-technologies-fswi.vercel.app/" target="_blank">Maclyne Technologies</a> with <i class="fas fa-heart" style="color: #e25555;"></i> for the glory of God</p>
                 </div>
             </div>
         </footer>
     </main>
+
+    <!-- Reverted Prayer Request Modal -->
     <div id="prayerModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -321,18 +360,22 @@
             <p>Submit your prayer request and our prayer team will intercede for you.</p>
             <form id="prayerForm" action="https://formspree.io/f/xblpnrpj" method="POST">
                 <input type="hidden" name="_subject" value="Prayer Request - Gacharage Church">
+                
                 <div class="form-group">
                     <label for="prayerName">Your Name *</label>
                     <input type="text" id="prayerName" name="name" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="prayerEmail">Email Address *</label>
                     <input type="email" id="prayerEmail" name="email" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="prayerPhone">Phone Number</label>
                     <input type="tel" id="prayerPhone" name="phone">
                 </div>
+
                 <div class="form-group">
                     <label for="prayerType">Type of Prayer Request</label>
                     <select id="prayerType" name="prayerType">
@@ -345,19 +388,24 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="prayerRequest">Your Prayer Request *</label>
                     <textarea id="prayerRequest" name="prayerRequest" rows="5" required></textarea>
                 </div>
+
                 <label class="checkbox-label">
                     <input type="checkbox" name="urgent" value="yes">
                     Mark as urgent prayer request
                 </label>
+                
                 <button type="submit" class="submit-btn">Submit Prayer Request</button>
                 <div class="form-success" id="prayerSuccess">Thank you for your prayer request. We will pray for you!</div>
             </form>
         </div>
     </div>
+
+    <!-- Reverted Registration Modal -->
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -365,27 +413,32 @@
             <p>Join our church family and become part of our growing community.</p>
             <form id="memberForm" action="https://formspree.io/f/xjkpnbpg" method="POST">
                 <input type="hidden" name="_subject" value="New Member Registration - Gacharage Church">
+                
                 <div class="form-group">
                     <label for="fullName">Full Name *</label>
                     <input type="text" id="fullName" name="fullName" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="email">Email Address *</label>
                     <input type="email" id="email" name="email" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="phone">Phone Number *</label>
                     <input type="tel" id="phone" name="phone" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="belt">Select Your Belt *</label>
                     <select id="belt" name="belt" required>
                         <option value="">Choose your belt</option>
-                        <option value="ruaka">Ruaka Belt</option>
+                        <option value="ruaka">RUaka Belt</option>
                         <option value="miberethi">Miberethi Belt</option>
                         <option value="rumenye">Rumenye Belt</option>
                     </select>
                 </div>
+                
                 <div class="form-group">
                     <label for="ministry">Ministry Interest (Optional)</label>
                     <select id="ministry" name="ministry">
@@ -399,10 +452,12 @@
                         <option value="ladies-zion">Ladies of Zion</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="address">Residential Address</label>
                     <input type="text" id="address" name="address" placeholder="Your physical address">
                 </div>
+
                 <div class="form-group">
                     <label for="ageGroup">Age Group</label>
                     <select id="ageGroup" name="ageGroup">
@@ -414,15 +469,19 @@
                         <option value="senior">60+ years</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="comments">Additional Comments</label>
                     <textarea id="comments" name="comments" placeholder="Any additional information..." rows="3"></textarea>
                 </div>
+                
                 <button type="submit" class="submit-btn">Register Now</button>
                 <div class="form-success" id="memberSuccess">Thank you for registering! We will contact you soon.</div>
             </form>
         </div>
     </div>
+
+    <!-- Reverted Giving Modal -->
     <div id="giveModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -430,18 +489,22 @@
             <p>Your generous giving supports our ministry and community outreach programs.</p>
             <form id="giveForm" action="https://formspree.io/f/manlrnyz" method="POST">
                 <input type="hidden" name="_subject" value="Giving Pledge - Gacharage Church">
+                
                 <div class="form-group">
                     <label for="giveName">Your Name *</label>
                     <input type="text" id="giveName" name="name" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="giveEmail">Email Address *</label>
                     <input type="email" id="giveEmail" name="email" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="givePhone">Phone Number *</label>
                     <input type="tel" id="givePhone" name="phone" required>
                 </div>
+
                 <div class="form-group">
                     <label for="giveType">Type of Giving</label>
                     <select id="giveType" name="giveType">
@@ -454,10 +517,12 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="giveAmount">Amount (Optional)</label>
                     <input type="number" id="giveAmount" name="amount" placeholder="Enter amount in KSh">
                 </div>
+
                 <div class="form-group">
                     <label for="giveFrequency">Giving Frequency</label>
                     <select id="giveFrequency" name="frequency">
@@ -469,6 +534,7 @@
                         <option value="annually">Annually</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="giveMethod">Preferred Giving Method</label>
                     <select id="giveMethod" name="method">
@@ -479,22 +545,28 @@
                         <option value="cheque">Cheque</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="giveMessage">Additional Message (Optional)</label>
                     <textarea id="giveMessage" name="message" placeholder="Any specific instructions or comments..." rows="3"></textarea>
                 </div>
+                
                 <button type="submit" class="submit-btn">Submit Pledge</button>
                 <div class="form-success" id="giveSuccess">Thank you for your generous pledge! We will contact you with further details.</div>
             </form>
         </div>
     </div>
+
+    <!-- Ministry Modal (Unchanged) -->
     <div id="ministryModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div id="modalContent"></div>
         </div>
     </div>
-    <button class="back-to-top"><i class="fas fa-chevron-up"></i></button>
+
+    <button class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <script src="script.js"></script>
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
