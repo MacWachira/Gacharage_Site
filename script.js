@@ -635,6 +635,14 @@ const ministryData = {
         contact: 'Leader: Sarah Njeri - 0715 678 901',
         meeting: 'Wednesdays, 2:00 PM - Prayer Room',
         verse: '"Therefore, since we are surrounded by such a great cloud of witnesses, let us throw off everything that hinders and the sin that so easily entangles." - Hebrews 12:1'
+    },
+    'graced-voices': {
+        title: 'Graced Voices',
+        description: 'Elevating worship through powerful vocals and harmonious melodies. Our worship team leads the congregation in heartfelt praise and worship during services and special events.',
+        activities: ['Weekly Rehearsals', 'Sunday Worship Leading', 'Special Event Performances', 'Worship Workshops', 'Community Outreach Concerts'],
+        contact: 'Worship Leader: Grace Wanjiru - 0723 456 789',
+        meeting: 'Wednesdays, 6:00 PM - Church Sanctuary',
+        verse: '"Let everything that has breath praise the LORD. Praise the LORD." - Psalm 150:6'
     }
 };
 
@@ -789,13 +797,168 @@ keyboardStyles.textContent = `
 `;
 document.head.appendChild(keyboardStyles);
 
+// Language Switcher Functionality
+const languageSwitcher = document.getElementById('languageSwitcher');
+let currentLanguage = 'en';
+
+const translations = {
+    en: {
+        // Navigation
+        home: 'Home',
+        about: 'About Us',
+        ministries: 'Ministries',
+        events: 'Events',
+        development: 'Development',
+        sermons: 'Sermons',
+        giving: 'Give',
+        contact: 'Contact',
+        
+        // Hero Section
+        heroTitle: 'Welcome to A.C.K Gacharage Church',
+        heroSubtitle: 'Growing in Faith, Serving in Love',
+        becomeMember: 'Become a Member',
+        requestPrayer: 'Request Prayer',
+        give: 'Give',
+        
+        // Quick Links
+        memberRegistration: 'Member Registration',
+        prayerRequest: 'Prayer Request',
+        giveSupport: 'Give & Support',
+        watchSermons: 'Watch Sermons',
+        
+        // About Section
+        aboutTitle: 'About Our Church',
+        aboutIntro: 'Gacharage Anglican Church has been serving the community since 1985, dedicated to spiritual growth, fellowship, and service.',
+        
+        // Contact Section
+        contactIntro: 'We\'d love to hear from you. Reach out to us with any questions, prayer requests, or to learn more about our church.'
+    },
+    sw: {
+        // Navigation
+        home: 'Nyumbani',
+        about: 'Kuhusu Sisi',
+        ministries: 'Huduma',
+        events: 'Matukio',
+        development: 'Maendeleo',
+        sermons: 'Hotuba',
+        giving: 'Changia',
+        contact: 'Wasiliana',
+        
+        // Hero Section
+        heroTitle: 'Karibu Kanisani A.C.K Gacharage',
+        heroSubtitle: 'Tukikua Katika Imani, Tukitumikia Kwa Upendo',
+        becomeMember: 'Jiunge na Sisi',
+        requestPrayer: 'Omba Maombi',
+        give: 'Changia',
+        
+        // Quick Links
+        memberRegistration: 'Usajili wa Wanachama',
+        prayerRequest: 'Ombi la Maombi',
+        giveSupport: 'Changia na Kuunga Mkono',
+        watchSermons: 'Tazama Hotuba',
+        
+        // About Section
+        aboutTitle: 'Kuhusu Kanisa Letu',
+        aboutIntro: 'Kanisa la Anglikana la Gacharage limekuwa likiwahudumia jamii tangu mwaka 1985, likijitolea kwa ukuaji wa kiroho, ushirika, na huduma.',
+        
+        // Contact Section
+        contactIntro: 'Tunapenda kusikia kutoka kwako. Wasiliana nasi kwa maswali yoyote, maombi, au kujifunza zaidi kuhusu kanisa letu.'
+    }
+};
+
+function switchLanguage(lang) {
+    currentLanguage = lang;
+    document.documentElement.lang = lang;
+    
+    // Update navigation
+    document.querySelectorAll('.nav-link').forEach((link, index) => {
+        const keys = ['home', 'about', 'ministries', 'events', 'development', 'sermons', 'giving', 'contact'];
+        if (keys[index]) {
+            link.textContent = translations[lang][keys[index]];
+        }
+    });
+    
+    // Update hero section
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const heroButtons = document.querySelectorAll('.hero .cta-button');
+    
+    if (heroTitle) heroTitle.textContent = translations[lang].heroTitle;
+    if (heroSubtitle) heroSubtitle.textContent = translations[lang].heroSubtitle;
+    if (heroButtons[0]) heroButtons[0].textContent = translations[lang].becomeMember;
+    if (heroButtons[1]) heroButtons[1].textContent = translations[lang].requestPrayer;
+    if (heroButtons[2]) heroButtons[2].textContent = translations[lang].give;
+    
+    // Update quick links
+    const quickLinks = document.querySelectorAll('.link-card h3');
+    quickLinks.forEach((link, index) => {
+        const keys = ['memberRegistration', 'prayerRequest', 'giveSupport', 'watchSermons'];
+        if (keys[index]) {
+            link.textContent = translations[lang][keys[index]];
+        }
+    });
+    
+    // Update about section
+    const aboutTitle = document.querySelector('.about-section .section-title');
+    const aboutIntro = document.querySelector('.about-section .section-intro');
+    
+    if (aboutTitle) aboutTitle.textContent = translations[lang].aboutTitle;
+    if (aboutIntro) aboutIntro.textContent = translations[lang].aboutIntro;
+    
+    // Update contact section
+    const contactIntro = document.querySelector('.contact-section .section-intro');
+    if (contactIntro) contactIntro.textContent = translations[lang].contactIntro;
+    
+    // Update language switcher
+    languageSwitcher.innerHTML = `<i class="fas fa-language"></i><span>${lang === 'en' ? 'SW' : 'EN'}</span>`;
+    
+    // Show toast notification
+    showToast(`Language switched to ${lang === 'en' ? 'English' : 'Kiswahili'}`);
+}
+
+if (languageSwitcher) {
+    languageSwitcher.addEventListener('click', () => {
+        const newLang = currentLanguage === 'en' ? 'sw' : 'en';
+        switchLanguage(newLang);
+    });
+}
+
+// Dark Mode Functionality
+const darkModeToggle = document.getElementById('darkModeToggle');
+let isDarkMode = false;
+
+function toggleDarkMode() {
+    isDarkMode = !isDarkMode;
+    document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    
+    // Update toggle icon
+    const icon = darkModeToggle.querySelector('i');
+    icon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+    
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', isDarkMode);
+    
+    // Show toast notification
+    showToast(`${isDarkMode ? 'Dark' : 'Light'} mode activated`);
+}
+
+if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+    
+    // Check for saved dark mode preference
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'true') {
+        isDarkMode = true;
+        document.body.setAttribute('data-theme', 'dark');
+        const icon = darkModeToggle.querySelector('i');
+        icon.className = 'fas fa-sun';
+    }
+}
+
 // Load saved settings when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     // Create static background
     createStaticBackground();
-    
-    // Add skip to main content link
-    addSkipToContentLink();
     
     // Enhance form labels
     enhanceFormAccessibility();
@@ -809,15 +972,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Hero slider initialized successfully!');
     }
 });
-
-// Add skip to main content link
-function addSkipToContentLink() {
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-link';
-    skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, document.body.firstChild);
-}
 
 // Enhance form accessibility
 function enhanceFormAccessibility() {
@@ -907,6 +1061,10 @@ console.log(`
 ✅ Readable Header Navigation
 ✅ Mobile Responsive Design
 ✅ Back to Top Button
+✅ Language Switcher (English/Kiswahili)
+✅ Dark Mode Toggle
+✅ Updated Graced Voices Ministry Icon
+✅ Enhanced Contact Section Visibility
 
 All features are now working perfectly!
 `);
