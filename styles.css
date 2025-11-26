@@ -1379,7 +1379,7 @@ main {
 
 /* Bible Verse Styling - Enhanced Readability */
 .bible-verse {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     margin-bottom: 2rem;
     color: var(--white) !important;
     text-align: center;
