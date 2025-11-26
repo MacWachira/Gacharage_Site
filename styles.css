@@ -23,6 +23,19 @@
     --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Dark mode variables */
+[data-theme="dark"] {
+    --primary-color: #2d4e78;
+    --secondary-color: #1e3a5f;
+    --text-dark: #f8f9fa;
+    --text-light: #adb5bd;
+    --white: #121212;
+    --light-bg: rgba(33, 37, 41, 0.85);
+    --dark-bg: rgba(18, 18, 18, 0.8);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
 /* Main background with static church image - APPLIED TO ALL PAGES */
 body {
     font-family: 'Poppins', sans-serif;
@@ -34,6 +47,7 @@ body {
     min-height: 100vh;
     /* Direct background applied to body for all pages */
     background: url('media/Dark-hallway.jpg') center/cover fixed;
+    transition: var(--transition-slow);
 }
 
 /* Fixed background overlay for better readability */
@@ -47,6 +61,11 @@ body::before {
     background: rgba(255, 255, 255, 0.1);
     z-index: -1;
     pointer-events: none;
+    transition: var(--transition-slow);
+}
+
+[data-theme="dark"] body::before {
+    background: rgba(0, 0, 0, 0.4);
 }
 
 /* Make sure content is above background */
@@ -168,6 +187,50 @@ main {
 .nav-link:focus {
     outline: 2px solid var(--accent-color);
     outline-offset: 4px;
+}
+
+/* Navigation Controls */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.language-switcher,
+.dark-mode-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: 0.5rem 0.8rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.language-switcher:hover,
+.dark-mode-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.language-switcher:focus,
+.dark-mode-toggle:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.dark-mode-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 .hamburger {
@@ -741,6 +804,18 @@ main {
     font-size: 1rem;
     line-height: 1.6;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+/* Contact highlight text */
+.contact-highlight {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: var(--accent-color) !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--accent-color);
 }
 
 .about-content {
@@ -1847,43 +1922,33 @@ main {
     to { transform: rotate(360deg); }
 }
 
-/* Screen reader only text */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+/* Focus styles for accessibility */
+*:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
-/* Skip to main content link */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--accent-color);
-    color: var(--dark-bg);
-    padding: 6px;
-    text-decoration: none;
-    border-radius: 4px;
-    z-index: 10000;
-    font-weight: 600;
-    transition: var(--transition);
-    font-size: 0.8rem;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
-.skip-link:focus {
-    top: 6px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* Focus styles for keyboard navigation */
-.keyboard-navigation *:focus {
-    outline: 3px solid var(--accent-color) !important;
-    outline-offset: 3px !important;
+/* Custom worship icon for Graced Voices */
+.fa-worship:before {
+    content: "♪";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2rem;
 }
 
 /* Enhanced Responsive Design */
@@ -1894,6 +1959,21 @@ main {
     
     .nav-container {
         padding: 0.8rem 1rem;
+    }
+    
+    .nav-controls {
+        gap: 0.5rem;
+    }
+    
+    .language-switcher,
+    .dark-mode-toggle {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    .dark-mode-toggle {
+        width: 35px;
+        height: 35px;
     }
     
     .prayer-banner {
@@ -2129,25 +2209,4 @@ main {
 
 .interactive:hover {
     transform: scale(1.02);
-}
-
-/* Focus styles for accessibility */
-*:focus {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
